@@ -116,7 +116,8 @@
                         <ul class="nav navbar-nav">
                             <li><a href="javascript:void(0);" class="right_toggle icon-menu" title="Right Menu"><i
                                         class="icon-call-end"></i></a></li>
-                            <li><a href="login.html" class="icon-menu"><i class="icon-power"></i></a></li>
+                            <li><a href="{{ route('logout') }}" class="icon-menu" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="icon-power"></i></a></li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf </form>
                         </ul>
                     </div>
                 </div>
