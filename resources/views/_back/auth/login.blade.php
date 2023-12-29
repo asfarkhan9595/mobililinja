@@ -7,6 +7,7 @@
         </div>
         <div class="card">
             <div class="body">
+                @include ('_back._inc.error')
                 <p class="lead">Login to your account</p>
                 <form class="form-auth-small m-t-20" method="POST" action="{{ route('login') }}">
                         @csrf
@@ -32,7 +33,7 @@
                         <label class="fancy-checkbox element-left">
                             <input type="checkbox">
                             <span>Remember me</span>
-                        </label>								
+                        </label>
                     </div>
                     <button type="submit" class="btn btn-info btn-block">LOGIN</button>
                     <div class="bottom">

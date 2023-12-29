@@ -11,8 +11,6 @@
 <link rel="stylesheet" href="{{ asset('_back/css/site.min.css') }}">
 </head>
 <body class="theme-cyan font-krub light_version">
-
-<!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
         <div class="bar1"></div>
@@ -25,9 +23,7 @@
 <div class="pattern">
     <span class="cyan"></span>
 </div>
-
 @yield('content')
-
 @include ('_back._inc._scripts')
 </body>
 </html>

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Superadmin\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Services\CustomerService;
-use App\Http\Services\companyFeatureService;
-use App\Http\Services\companyBillingService;
+use App\Http\Services\CompanyFeatureService;
+use App\Http\Services\CompanyBillingService;
+use Exception;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
-{ 
+{
     private $customerService;
     private $companyFeatureService;
     private $companyBillingService;
@@ -17,8 +19,8 @@ class CustomerController extends Controller
 
     public function __construct(CustomerService $customerService){
         $this->customerService = $customerService;
-        $this->companyFeatureService = new companyBillingService;
-        $this->companyBillingService = new companyBillingService;
+        $this->companyFeatureService = new CompanyFeatureService;
+        $this->companyBillingService = new CompanyBillingService;
     }
 
     /**
@@ -45,14 +47,13 @@ class CustomerController extends Controller
         $this->beginTransaction();
 
         try {
-       
-            $customer = $this->customerService->createCustomer($request);
-            $feature = $this->companyFeatureService->createCompanyFeature($request);
-            $feature = $this->companyBillingService->createCompanyBilling($request);
-       
+
+            $customer = $this->customerService->create($request);
+            // $feature = $this->companyFeatureService->createCompanyFeature($request);
+            // $feature = $this->companyBillingService->createCompanyBilling($request);
+
             $this->commit();
         }
-
         catch (Exception $e) {
             $this->rollBack();
             throw $e;

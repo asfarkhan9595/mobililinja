@@ -89,7 +89,6 @@
     <div id="wrapper">
         <nav class="navbar top-navbar">
             <div class="container-fluid">
-
                 <div class="navbar-left">
                     <div class="navbar-btn">
                         <a href="#"><img src="assets/images/logo_small.png" alt="Logo" class="img-fluid logo"></a>
@@ -247,10 +246,13 @@
                 </div>
             </div>
         </div>
-
         @include ('_back._inc._sidebar')
-        @yield('content')
-
+        <div id="main-content">
+            <div class="container-fluid">
+                @include ('_back._inc.error')
+                @yield('content')
+            </div>
+        </div>
     </div>
     @include ('_back._inc._scripts')
     @stack('page_script')

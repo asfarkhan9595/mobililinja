@@ -14,11 +14,10 @@ return new class extends Migration
         Schema::create('company_billings', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained();
-            $table->string('billing_full_name')->nullable();
-            $table->string('billing_card_number')->nullable();
-            $table->string('billing_expiration_month')->nullable();
-            $table->string('billing_expiration_year')->nullable();
-            $table->string('billing_cvv')->nullable();
+            $table->string('full_name')->nullable();
+            $table->string('card_number')->nullable();
+            $table->string('expiration_month')->nullable();
+            $table->string('expiration_year')->nullable();
             $table->timestamps();
         });
     }

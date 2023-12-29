@@ -2,7 +2,7 @@
 
 namespace App\Http\Services;
 
-class companyBillingService
-{ 
+class CompanyFeatureService
+{
 
 }

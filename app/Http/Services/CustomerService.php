@@ -5,12 +5,12 @@ namespace App\Http\Services;
 use App\Models\Customer;
 
 class CustomerService
-{ 
+{
     public function getAllCustomers(){
 
     }
 
-    public function createCustomer($request){
+    public function create($request){
         return Customer::create([
             'customer_number' => $request->input('customer_number'),
             'company_name' => $request->input('company_name'),

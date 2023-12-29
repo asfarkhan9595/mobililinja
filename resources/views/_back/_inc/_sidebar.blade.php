@@ -16,8 +16,8 @@
                     <li class="divider"></li>
                     <li><a href="page-login.html"><i class="icon-power"></i>Logout</a></li>
                 </ul>
-            </div>                
-        </div>  
+            </div>
+        </div>
         <nav id="left-sidebar-nav" class="sidebar-nav">
             <ul id="main-menu" class="metismenu">
                 <!-- <li><a href="webphone.html"><i class="icon-call-end"></i><span>Webphone</span></a></li>
@@ -36,14 +36,16 @@
                 <li><a href="systemrecordings.html"><i class="icon-volume-2"></i><span>System recordings</span></a></li>
                 <li><a href="reports.html"><i class="icon-pie-chart"></i><span>Reports</span></a></li>
                 -->
-                <li class="header">SuperAdmin</li> 
-                <li><a href="{{ route('superadmin.customers.manage') }}"><i class="icon-globe"></i><span>Customers</span></a></li>
-                <li><a href="invoices.html"><i class="icon-docs"></i><span>Invoices</span></a></li>
-                <li><a href="pstn.html"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>
-                <li><a href="trunks.html"><i class="icon-share"></i><span>Trunks</span></a></li>
-                <li><a href="outbound.html"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
-                <li><a href="firewall.html"><i class="icon-ban"></i><span>Firewall</span></a></li>
+                <li class="header">SuperAdmin</li>
+                @if(auth()->user()->hasPermission(['create-customer','edit-customer','delete-customer','list-customer']))
+                <li><a href="{{ route('superadmin.customer.index') }}"><i class="icon-globe"></i><span>Customers</span></a></li>
+                @endif
+                <li><a href="#"><i class="icon-docs"></i><span>Invoices</span></a></li>
+                <li><a href="#"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>
+                <li><a href="#"><i class="icon-share"></i><span>Trunks</span></a></li>
+                <li><a href="#"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
+                <li><a href="#"><i class="icon-ban"></i><span>Firewall</span></a></li>
             </ul>
-        </nav>          
+        </nav>
     </div><div class="slimScrollBar" style="background: rgb(28, 34, 44); width: 2px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 3px; z-index: 99; right: 1px; height: 94.2156px;"></div><div class="slimScrollRail" style="width: 2px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
 </div>
