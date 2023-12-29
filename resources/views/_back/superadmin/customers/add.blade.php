@@ -1,11 +1,12 @@
 <!-- larg modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title h4" id="myLargeModalLabel">Add new customer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
             <form action="{{ route('superadmin.customer.store') }}" method="post">
@@ -55,17 +56,15 @@
                                                         <label>Select country</label>
                                                         <div class="form-group">
                                                             <select class="form-control" name="country">
-                                                                <option value="">-- Select Country --</option>
-                                                                @foreach($countries as $country)
-                                                                    <option value="{{ $country['code'] }}">{{ $country['name'] }}</option>
-                                                                @endforeach
+                                                                <option value="selected">AF - Afghanistan</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>VAT</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" name="vat" value="{{ old('vat') }}">
+                                                            <input type="text" class="form-control" name="vat"
+                                                                value="{{ old('vat') }}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -77,7 +76,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-user"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" name="contact_person" value="{{ old('contact_person') }}" placeholder="Ex: +00 (000) 000-00-00">
+                                                            <input type="text" class="form-control" name="contact_person_name" value="{{ old('contact_person_name') }}" placeholder="Ex: +00 (000) 000-00-00">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
@@ -86,7 +85,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-envelope-o"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" name="email" value="{{ old('email') }}" placeholder="Ex: +00 (000) 000-00-00">
+                                                            <input type="text" class="form-control" name="contact_person_email" value="{{ old('contact_person_email') }}" placeholder="Ex: +00 (000) 000-00-00">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
@@ -95,7 +94,7 @@
                                                             <div class="input-group-prepend">
                                                                 <span class="input-group-text"><i class="fa fa-phone"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" name="phone_number" value="{{ old('phone_number') }}" placeholder="Ex: +00 (000) 000-00-00">
+                                                            <input type="text" class="form-control" name="contact_person_phone" value="{{ old('contact_person_phone') }}" placeholder="Ex: +00 (000) 000-00-00">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -109,128 +108,161 @@
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>PBX</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Extensions</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>IVR</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Voicemail</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Ring Groups</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Conferences</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Call Recording</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Callback</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Calendar</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Reports</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Dashboard</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Speech to Text</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>AI</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>Street address</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>ZIP
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control"
+                                                                    value="">
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="tab-pane" id="Billing">
                                         <div class="col-md-12">
                                             <div class="body demo-card">
                                                 <div class="row clearfix">
                                                     <form>
                                                         <div class="form-group row mt-5">
-                                                            <label class="col-sm-2 col-form-label">Payment Information</label>
-                                                                <div class="col-md-6 col-sm-10">
-                                                                    <div class="form-group">
-                                                                        <label>Full name (on the card)</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                                                                </div>
-                                                                                    <input type="text" class="form-control" name="username" placeholder="" required="">
-                                                                            </div>
+                                                            <label class="col-sm-2 col-form-label">Payment
+                                                                Information</label>
+                                                            <div class="col-md-6 col-sm-10">
+                                                                <div class="form-group">
+                                                                    <label>Full name (on the card)</label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text"><i
+                                                                                    class="fa fa-user"></i></span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            name="username" placeholder=""
+                                                                            required="">
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label>Card number</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
-                                                                                </div>
-                                                                                    <input type="text" class="form-control" name="cardNumber" placeholder="">
-                                                                            </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Card number</label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text"><i
+                                                                                    class="fa fa-credit-card"></i></span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            name="cardNumber" placeholder="">
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-8">
-                                                                            <div class="form-group">
-                                                                                <label><span class="hidden-xs">Expiration</span> </label>
-                                                                                <div class="form-inline">
-                                                                                    <select class="form-control" style="width:45%">
-                                                                                        <option>MM</option>
-                                                                                        <option>01 - Janiary</option>
-                                                                                        <option>02 - February</option>
-                                                                                        <option>03 - February</option>
-                                                                                    </select>
-                                                                                    <span style="width:10%; text-align: center"> / </span>
-                                                                                    <select class="form-control" style="width:45%">
-                                                                                        <option>YY</option>
-                                                                                        <option>2018</option>
-                                                                                        <option>2019</option>
-                                                                                    </select>
-                                                                                </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-8">
+                                                                        <div class="form-group">
+                                                                            <label><span
+                                                                                    class="hidden-xs">Expiration</span>
+                                                                            </label>
+                                                                            <div class="form-inline">
+                                                                                <select class="form-control"
+                                                                                    style="width:45%">
+                                                                                    <option>MM</option>
+                                                                                    <option>01 - Janiary</option>
+                                                                                    <option>02 - February</option>
+                                                                                    <option>03 - February</option>
+                                                                                </select>
+                                                                                <span
+                                                                                    style="width:10%; text-align: center">
+                                                                                    / </span>
+                                                                                <select class="form-control"
+                                                                                    style="width:45%">
+                                                                                    <option>YY</option>
+                                                                                    <option>2018</option>
+                                                                                    <option>2019</option>
+                                                                                </select>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-4">
                                                                         <div class="form-group">
-                                                                            <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
-                                                                            <input class="form-control" required="" type="text">
+                                                                            <label data-toggle="tooltip"
+                                                                                title=""
+                                                                                data-original-title="3 digits code on back side of the card">CVV
+                                                                                <i
+                                                                                    class="fa fa-question-circle"></i></label>
+                                                                            <input class="form-control" required=""
+                                                                                type="text">
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="subscribe btn btn-primary btn-block" type="button"> Confirm  </button>
+                                                                <button class="subscribe btn btn-primary btn-block"
+                                                                    type="button"> Confirm </button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -238,13 +270,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
                                 <div class="col-lg-12 col-md-12">
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default mb-2" data-dismiss="modal" aria-label="Close">Cancel</button>
-                                        <input type="submit" class="btn btn-outline-info mb-2" value="Save"></button>
+                                        <button type="button" class="btn btn-default mb-2" data-dismiss="modal"
+                                            aria-label="Close">Cancel</button>
+                                        <input type="submit" class="btn btn-outline-info mb-2"
+                                            value="Save"></button>
                                     </div>
-                                </div>          
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -252,7 +286,7 @@
             </form>
         </div>
     </div>
-</div> 
+</div>
 
 <!-- larg modal -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
@@ -261,19 +295,22 @@
             <div class="modal-header">
                 <h5 class="modal-title h4" id="myLargeModalLabel">Add new customer</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
                 <form action="{{ route('superadmin.customer.store') }}" method="post">
-                @csrf
+                    @csrf
                     <div class="row clearfix">
                         <div class="col-md-12">
                             <div class="body demo-card">
                                 <ul class="nav nav-tabs3 table-nav">
-                                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#General">General</a></li>
-                                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Features">Features</a></li>
-                                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Billing">Billing</a></li>
+                                    <li class="nav-item"><a class="nav-link active show" data-toggle="tab"
+                                            href="#General">General</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                            href="#Features">Features</a></li>
+                                    <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                            href="#Billing">Billing</a></li>
                                 </ul>
                                 <div class="tab-content">
                                     <div class="tab-pane show active" id="General">
@@ -283,25 +320,29 @@
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>Company name</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>Street address</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>ZIP</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>City</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
@@ -335,13 +376,16 @@
                                                                 <option value="BJ">Benin</option>
                                                                 <option value="BM">Bermuda</option>
                                                                 <option value="BT">Bhutan</option>
-                                                                <option value="BO">Bolivia, Plurinational State of</option>
-                                                                <option value="BQ">Bonaire, Sint Eustatius and Saba</option>
+                                                                <option value="BO">Bolivia, Plurinational State of
+                                                                </option>
+                                                                <option value="BQ">Bonaire, Sint Eustatius and Saba
+                                                                </option>
                                                                 <option value="BA">Bosnia and Herzegovina</option>
                                                                 <option value="BW">Botswana</option>
                                                                 <option value="BV">Bouvet Island</option>
                                                                 <option value="BR">Brazil</option>
-                                                                <option value="IO">British Indian Ocean Territory</option>
+                                                                <option value="IO">British Indian Ocean Territory
+                                                                </option>
                                                                 <option value="BN">Brunei Darussalam</option>
                                                                 <option value="BG">Bulgaria</option>
                                                                 <option value="BF">Burkina Faso</option>
@@ -351,7 +395,8 @@
                                                                 <option value="CA">Canada</option>
                                                                 <option value="CV">Cape Verde</option>
                                                                 <option value="KY">Cayman Islands</option>
-                                                                <option value="CF">Central African Republic</option>
+                                                                <option value="CF">Central African Republic
+                                                                </option>
                                                                 <option value="TD">Chad</option>
                                                                 <option value="CL">Chile</option>
                                                                 <option value="CN">China</option>
@@ -360,7 +405,8 @@
                                                                 <option value="CO">Colombia</option>
                                                                 <option value="KM">Comoros</option>
                                                                 <option value="CG">Congo</option>
-                                                                <option value="CD">Congo, the Democratic Republic of the</option>
+                                                                <option value="CD">Congo, the Democratic Republic
+                                                                    of the</option>
                                                                 <option value="CK">Cook Islands</option>
                                                                 <option value="CR">Costa Rica</option>
                                                                 <option value="CI">Côte d'Ivoire</option>
@@ -380,14 +426,16 @@
                                                                 <option value="ER">Eritrea</option>
                                                                 <option value="EE">Estonia</option>
                                                                 <option value="ET">Ethiopia</option>
-                                                                <option value="FK">Falkland Islands (Malvinas)</option>
+                                                                <option value="FK">Falkland Islands (Malvinas)
+                                                                </option>
                                                                 <option value="FO">Faroe Islands</option>
                                                                 <option value="FJ">Fiji</option>
                                                                 <option value="FI">Finland</option>
                                                                 <option value="FR">France</option>
                                                                 <option value="GF">French Guiana</option>
                                                                 <option value="PF">French Polynesia</option>
-                                                                <option value="TF">French Southern Territories</option>
+                                                                <option value="TF">French Southern Territories
+                                                                </option>
                                                                 <option value="GA">Gabon</option>
                                                                 <option value="GM">Gambia</option>
                                                                 <option value="GE">Georgia</option>
@@ -405,15 +453,18 @@
                                                                 <option value="GW">Guinea-Bissau</option>
                                                                 <option value="GY">Guyana</option>
                                                                 <option value="HT">Haiti</option>
-                                                                <option value="HM">Heard Island and McDonald Islands</option>
-                                                                <option value="VA">Holy See (Vatican City State)</option>
+                                                                <option value="HM">Heard Island and McDonald
+                                                                    Islands</option>
+                                                                <option value="VA">Holy See (Vatican City State)
+                                                                </option>
                                                                 <option value="HN">Honduras</option>
                                                                 <option value="HK">Hong Kong</option>
                                                                 <option value="HU">Hungary</option>
                                                                 <option value="IS">Iceland</option>
                                                                 <option value="IN">India</option>
                                                                 <option value="ID">Indonesia</option>
-                                                                <option value="IR">Iran, Islamic Republic of</option>
+                                                                <option value="IR">Iran, Islamic Republic of
+                                                                </option>
                                                                 <option value="IQ">Iraq</option>
                                                                 <option value="IE">Ireland</option>
                                                                 <option value="IM">Isle of Man</option>
@@ -426,11 +477,13 @@
                                                                 <option value="KZ">Kazakhstan</option>
                                                                 <option value="KE">Kenya</option>
                                                                 <option value="KI">Kiribati</option>
-                                                                <option value="KP">Korea, Democratic People's Republic of</option>
+                                                                <option value="KP">Korea, Democratic People's
+                                                                    Republic of</option>
                                                                 <option value="KR">Korea, Republic of</option>
                                                                 <option value="KW">Kuwait</option>
                                                                 <option value="KG">Kyrgyzstan</option>
-                                                                <option value="LA">Lao People's Democratic Republic</option>
+                                                                <option value="LA">Lao People's Democratic Republic
+                                                                </option>
                                                                 <option value="LV">Latvia</option>
                                                                 <option value="LB">Lebanon</option>
                                                                 <option value="LS">Lesotho</option>
@@ -440,7 +493,8 @@
                                                                 <option value="LT">Lithuania</option>
                                                                 <option value="LU">Luxembourg</option>
                                                                 <option value="MO">Macao</option>
-                                                                <option value="MK">Macedonia, the former Yugoslav Republic of</option>
+                                                                <option value="MK">Macedonia, the former Yugoslav
+                                                                    Republic of</option>
                                                                 <option value="MG">Madagascar</option>
                                                                 <option value="MW">Malawi</option>
                                                                 <option value="MY">Malaysia</option>
@@ -453,7 +507,8 @@
                                                                 <option value="MU">Mauritius</option>
                                                                 <option value="YT">Mayotte</option>
                                                                 <option value="MX">Mexico</option>
-                                                                <option value="FM">Micronesia, Federated States of</option>
+                                                                <option value="FM">Micronesia, Federated States of
+                                                                </option>
                                                                 <option value="MD">Moldova, Republic of</option>
                                                                 <option value="MC">Monaco</option>
                                                                 <option value="MN">Mongolia</option>
@@ -473,12 +528,14 @@
                                                                 <option value="NG">Nigeria</option>
                                                                 <option value="NU">Niue</option>
                                                                 <option value="NF">Norfolk Island</option>
-                                                                <option value="MP">Northern Mariana Islands</option>
+                                                                <option value="MP">Northern Mariana Islands
+                                                                </option>
                                                                 <option value="NO">Norway</option>
                                                                 <option value="OM">Oman</option>
                                                                 <option value="PK">Pakistan</option>
                                                                 <option value="PW">Palau</option>
-                                                                <option value="PS">Palestinian Territory, Occupied</option>
+                                                                <option value="PS">Palestinian Territory, Occupied
+                                                                </option>
                                                                 <option value="PA">Panama</option>
                                                                 <option value="PG">Papua New Guinea</option>
                                                                 <option value="PY">Paraguay</option>
@@ -494,12 +551,16 @@
                                                                 <option value="RU">Russian Federation</option>
                                                                 <option value="RW">Rwanda</option>
                                                                 <option value="BL">Saint Barthélemy</option>
-                                                                <option value="SH">Saint Helena, Ascension and Tristan da Cunha</option>
+                                                                <option value="SH">Saint Helena, Ascension and
+                                                                    Tristan da Cunha</option>
                                                                 <option value="KN">Saint Kitts and Nevis</option>
                                                                 <option value="LC">Saint Lucia</option>
-                                                                <option value="MF">Saint Martin (French part)</option>
-                                                                <option value="PM">Saint Pierre and Miquelon</option>
-                                                                <option value="VC">Saint Vincent and the Grenadines</option>
+                                                                <option value="MF">Saint Martin (French part)
+                                                                </option>
+                                                                <option value="PM">Saint Pierre and Miquelon
+                                                                </option>
+                                                                <option value="VC">Saint Vincent and the Grenadines
+                                                                </option>
                                                                 <option value="WS">Samoa</option>
                                                                 <option value="SM">San Marino</option>
                                                                 <option value="ST">Sao Tome and Principe</option>
@@ -509,13 +570,15 @@
                                                                 <option value="SC">Seychelles</option>
                                                                 <option value="SL">Sierra Leone</option>
                                                                 <option value="SG">Singapore</option>
-                                                                <option value="SX">Sint Maarten (Dutch part)</option>
+                                                                <option value="SX">Sint Maarten (Dutch part)
+                                                                </option>
                                                                 <option value="SK">Slovakia</option>
                                                                 <option value="SI">Slovenia</option>
                                                                 <option value="SB">Solomon Islands</option>
                                                                 <option value="SO">Somalia</option>
                                                                 <option value="ZA">South Africa</option>
-                                                                <option value="GS">South Georgia and the South Sandwich Islands</option>
+                                                                <option value="GS">South Georgia and the South
+                                                                    Sandwich Islands</option>
                                                                 <option value="SS">South Sudan</option>
                                                                 <option value="ES">Spain</option>
                                                                 <option value="LK">Sri Lanka</option>
@@ -526,9 +589,11 @@
                                                                 <option value="SE">Sweden</option>
                                                                 <option value="CH">Switzerland</option>
                                                                 <option value="SY">Syrian Arab Republic</option>
-                                                                <option value="TW">Taiwan, Province of China</option>
+                                                                <option value="TW">Taiwan, Province of China
+                                                                </option>
                                                                 <option value="TJ">Tajikistan</option>
-                                                                <option value="TZ">Tanzania, United Republic of</option>
+                                                                <option value="TZ">Tanzania, United Republic of
+                                                                </option>
                                                                 <option value="TH">Thailand</option>
                                                                 <option value="TL">Timor-Leste</option>
                                                                 <option value="TG">Togo</option>
@@ -538,18 +603,21 @@
                                                                 <option value="TN">Tunisia</option>
                                                                 <option value="TR">Turkey</option>
                                                                 <option value="TM">Turkmenistan</option>
-                                                                <option value="TC">Turks and Caicos Islands</option>
+                                                                <option value="TC">Turks and Caicos Islands
+                                                                </option>
                                                                 <option value="TV">Tuvalu</option>
                                                                 <option value="UG">Uganda</option>
                                                                 <option value="UA">Ukraine</option>
                                                                 <option value="AE">United Arab Emirates</option>
                                                                 <option value="GB">United Kingdom</option>
                                                                 <option value="US">United States</option>
-                                                                <option value="UM">United States Minor Outlying Islands</option>
+                                                                <option value="UM">United States Minor Outlying
+                                                                    Islands</option>
                                                                 <option value="UY">Uruguay</option>
                                                                 <option value="UZ">Uzbekistan</option>
                                                                 <option value="VU">Vanuatu</option>
-                                                                <option value="VE">Venezuela, Bolivarian Republic of</option>
+                                                                <option value="VE">Venezuela, Bolivarian Republic
+                                                                    of</option>
                                                                 <option value="VN">Viet Nam</option>
                                                                 <option value="VG">Virgin Islands, British</option>
                                                                 <option value="VI">Virgin Islands, U.S.</option>
@@ -564,41 +632,48 @@
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>VAT</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>Contact person</label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                                                <span class="input-group-text"><i
+                                                                        class="fa fa-user"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" placeholder="Ex: +00 (000) 000-00-00">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Ex: +00 (000) 000-00-00">
                                                         </div>
-                                                    </div>                                    
+                                                    </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>Email</label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-envelope-o"></i></span>
+                                                                <span class="input-group-text"><i
+                                                                        class="fa fa-envelope-o"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" placeholder="Ex: +00 (000) 000-00-00">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Ex: +00 (000) 000-00-00">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>Phone number</label>
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i class="fa fa-phone"></i></span>
+                                                                <span class="input-group-text"><i
+                                                                        class="fa fa-phone"></i></span>
                                                             </div>
-                                                            <input type="text" class="form-control" placeholder="Ex: +00 (000) 000-00-00">
+                                                            <input type="text" class="form-control"
+                                                                placeholder="Ex: +00 (000) 000-00-00">
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="tab-pane" id="Features">
                                         <div class="col-md-12">
                                             <div class="body demo-card">
@@ -606,128 +681,161 @@
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>PBX</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Extensions</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>IVR</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Voicemail</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Ring Groups</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Conferences</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Call Recording</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Callback</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Calendar</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Reports</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Dashboard</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>Speech to Text</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                         <label>AI</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>Street address</label>
                                                         <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
+                                                            <input type="text" class="form-control"
+                                                                value="">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4 col-md-12">
                                                         <label>ZIP
-                                                        <div class="form-group">
-                                                            <input type="text" class="form-control" value="">
-                                                        </div>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control"
+                                                                    value="">
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="tab-pane" id="Billing">
                                         <div class="col-md-12">
                                             <div class="body demo-card">
                                                 <div class="row clearfix">
                                                     <form>
                                                         <div class="form-group row mt-5">
-                                                            <label class="col-sm-2 col-form-label">Payment Information</label>
-                                                                <div class="col-md-6 col-sm-10">
-                                                                    <div class="form-group">
-                                                                        <label>Full name (on the card)</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i class="fa fa-user"></i></span>
-                                                                                </div>
-                                                                                    <input type="text" class="form-control" name="username" placeholder="" required="">
-                                                                            </div>
+                                                            <label class="col-sm-2 col-form-label">Payment
+                                                                Information</label>
+                                                            <div class="col-md-6 col-sm-10">
+                                                                <div class="form-group">
+                                                                    <label>Full name (on the card)</label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text"><i
+                                                                                    class="fa fa-user"></i></span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            name="username" placeholder=""
+                                                                            required="">
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label>Card number</label>
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
-                                                                                </div>
-                                                                                    <input type="text" class="form-control" name="cardNumber" placeholder="">
-                                                                            </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label>Card number</label>
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <span class="input-group-text"><i
+                                                                                    class="fa fa-credit-card"></i></span>
+                                                                        </div>
+                                                                        <input type="text" class="form-control"
+                                                                            name="cardNumber" placeholder="">
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <div class="col-sm-8">
-                                                                            <div class="form-group">
-                                                                                <label><span class="hidden-xs">Expiration</span> </label>
-                                                                                <div class="form-inline">
-                                                                                    <select class="form-control" style="width:45%">
-                                                                                        <option>MM</option>
-                                                                                        <option>01 - Janiary</option>
-                                                                                        <option>02 - February</option>
-                                                                                        <option>03 - February</option>
-                                                                                    </select>
-                                                                                    <span style="width:10%; text-align: center"> / </span>
-                                                                                    <select class="form-control" style="width:45%">
-                                                                                        <option>YY</option>
-                                                                                        <option>2018</option>
-                                                                                        <option>2019</option>
-                                                                                    </select>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-8">
+                                                                        <div class="form-group">
+                                                                            <label><span
+                                                                                    class="hidden-xs">Expiration</span>
+                                                                            </label>
+                                                                            <div class="form-inline">
+                                                                                <select class="form-control"
+                                                                                    style="width:45%">
+                                                                                    <option>MM</option>
+                                                                                    <option>01 - Janiary</option>
+                                                                                    <option>02 - February</option>
+                                                                                    <option>03 - February</option>
+                                                                                </select>
+                                                                                <span
+                                                                                    style="width:10%; text-align: center">
+                                                                                    / </span>
+                                                                                <select class="form-control"
+                                                                                    style="width:45%">
+                                                                                    <option>YY</option>
+                                                                                    <option>2018</option>
+                                                                                    <option>2019</option>
+                                                                                </select>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-4">
                                                                         <div class="form-group">
-                                                                            <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
-                                                                            <input class="form-control" required="" type="text">
+                                                                            <label data-toggle="tooltip"
+                                                                                title=""
+                                                                                data-original-title="3 digits code on back side of the card">CVV
+                                                                                <i
+                                                                                    class="fa fa-question-circle"></i></label>
+                                                                            <input class="form-control" required=""
+                                                                                type="text">
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <button class="subscribe btn btn-primary btn-block" type="button"> Confirm  </button>
+                                                                <button class="subscribe btn btn-primary btn-block"
+                                                                    type="button"> Confirm </button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -735,13 +843,14 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>  
+                                </div>
                                 <div class="col-lg-12 col-md-12">
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default mb-2" data-dismiss="modal" aria-label="Close">Cancel</button>
+                                        <button type="button" class="btn btn-default mb-2" data-dismiss="modal"
+                                            aria-label="Close">Cancel</button>
                                         <button type="submit" class="btn btn-outline-info mb-2">Save</button>
                                     </div>
-                                </div>          
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -749,16 +858,17 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 <!-- Vertically centered -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Delete</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">

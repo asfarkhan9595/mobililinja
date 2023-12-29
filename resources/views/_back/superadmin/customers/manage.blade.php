@@ -2,7 +2,6 @@
 @section('title')
 Manage Customers
 @endsection
-@section('title')
 @push('page_style')
 <style>
     td.details-control {
@@ -120,6 +119,4 @@ Manage Customers
     </div>
 </div>
 @include ('_back.superadmin.customers.add')
-@push('page_script')
-@endpush
 @endsection
