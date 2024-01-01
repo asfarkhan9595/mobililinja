@@ -26,25 +26,23 @@ class Module extends Command
      */
     public function handle()
     {
-        // $module = ucfirst($this->argument('name'));
-        $module = lcfirst(ucwords($this->argument('name')));
-        // dd($module);
+        $module = ucfirst(ucwords($this->argument('name')));
 
-        // Manually create Services - no built-in generator
+        // Manually create Controller - no built-in generator
         if(!File::exists(app_path("Http/Controllers/Superadmin/{$module}")))
         File::makeDirectory(app_path("Http/Controllers/Superadmin/{$module}"), 0755, true);
 
         $servicePath = app_path("Http/Controllers/Superadmin/{$module}/{$module}Controller.php");
         $this->generateFile($servicePath, $this->getControllerStub($module));
-        
-        // Manually create Controller - no built-in generator
+
+        // Manually create Service - no built-in generator
         if(!File::exists(app_path("Http/Services")))
         File::makeDirectory(app_path("Http/Services"), 0755, true);
 
         $servicePath = app_path("Http/Services/{$module}Service.php");
         $this->generateFile($servicePath, $this->getServiceStub($module));
 
-        
+
         // Create Routes
         $module = strtolower($module);
 
@@ -56,7 +54,7 @@ class Module extends Command
         // Create Resources
         $resourcePath = resource_path("views/_back/superadmin/{$module}s/manage.blade.php");
         $this->generateFile($resourcePath, $this->getResourceStub($module));
-        
+
         $resourcePath = resource_path("views/_back/superadmin/{$module}s/create.blade.php");
         $this->generateFile($resourcePath, $this->getResourceStub($module));
 

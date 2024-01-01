@@ -39,15 +39,7 @@ return [
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
-        ],
-        'superadmin' => [
-            'driver' => 'session',
-            'provider' => 'superadmins',
-        ],
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
+        ]
     ],
 
     /*
@@ -71,15 +63,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
-        ],
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Admin::class,
-        ],
-        'superadmins' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\Superadmin::class,
-        ],
+        ]
     ],
 
     /*
@@ -107,19 +91,7 @@ return [
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,
-        ],
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
-        'superadmins' => [
-            'provider' => 'superadmins',
-            'table' => 'password_reset_tokens',
-            'expire' => 60,
-            'throttle' => 60,
-        ],
+        ]
     ],
 
     /*

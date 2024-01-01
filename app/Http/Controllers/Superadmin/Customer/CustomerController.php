@@ -2,31 +2,28 @@
 
 namespace App\Http\Controllers\Superadmin\Customer;
 
+use App\DataTables\CustomerDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Services\CustomerService;
-use App\Http\Services\companyFeatureService;
-use App\Http\Services\companyBillingService;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
-{ 
+{
     private $customerService;
-    private $companyFeatureService;
-    private $companyBillingService;
-
 
     public function __construct(CustomerService $customerService){
         $this->customerService = $customerService;
-        $this->companyFeatureService = new companyBillingService;
-        $this->companyBillingService = new companyBillingService;
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(CustomerDataTable $customerDataTable)
     {
-        return view('_back.superadmin.customers.manage');
+        return $customerDataTable->render('_back.superadmin.customers.manage');
     }
 
     /**
@@ -42,20 +39,23 @@ class CustomerController extends Controller
      */
     public function store(CreateCustomerRequest $request)
     {
-        $this->beginTransaction();
-
-        try {
-       
-            $customer = $this->customerService->createCustomer($request);
-            $feature = $this->companyFeatureService->createCompanyFeature($request);
-            $feature = $this->companyBillingService->createCompanyBilling($request);
-       
-            $this->commit();
-        }
-
-        catch (Exception $e) {
-            $this->rollBack();
+         try {
+            DB::transaction(function () use ($request) {
+                $createCustomer = $this->customerService->create($request);
+                return [
+                    'createCustomer' => $createCustomer,
+                ];
+                if ($createCustomer['createCustomer']){
+                    DB::commit();
+                    return redirect()->route('superadmin.customer.index')->with(['message'=>trans('messages.customer-created')]);
+                }
+                DB::rollback();
+                return false;
+            });
+        } catch (Exception $e) {
+            DB::rollBack();
             throw $e;
+            return redirect()->route('superadmin.customer.index');
         }
     }
 

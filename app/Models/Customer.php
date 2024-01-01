@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Customer extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'customer_number',
-        'company_name',
+        'name',
         'street_address',
         'zip',
         'city',
@@ -22,12 +22,12 @@ class Customer extends Model
         'contact_person_phone',
     ];
 
-    public function features()
+    public function company_features()
     {
         return $this->hasOne(CompanyFeatures::class);
     }
 
-    public function billing()
+    public function company_billing()
     {
         return $this->hasOne(CompanyBilling::class);
     }

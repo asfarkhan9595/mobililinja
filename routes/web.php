@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,11 +22,11 @@ Auth::routes();
 
 Route::group(['namespace'=>'App\Http\Controllers'],function(){
     // Dashboard
-    Route::group(['middleware'=>'auth:superadmin'],function(){
+    Route::group(['middleware'=>'auth'],function(){
         Route::get('dashboard', function () {
             return view('_back.superadmin.dashboard');
         })->name('superadmin.dashboard');
-    });   
+    });
 });
 Route::group(['middleware'=>'auth','namespace'=>'App\Http\Controllers'],function(){
     Route::group(['prefix'=>'admin'],function(){
@@ -35,6 +36,3 @@ Route::group(['middleware'=>'auth','namespace'=>'App\Http\Controllers'],function
         }
     });
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
