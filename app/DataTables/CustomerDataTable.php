@@ -25,7 +25,7 @@ class CustomerDataTable extends DataTable
         return (new EloquentDataTable($query))
             ->addColumn('action', function($row){
                 return '<button class="btn btn-outline-info mb-2 editBtn" data-toggle="modal" data-target="#myLargeModalText" data-record-id="'.$row->id.'"><i class="fa fa-edit"></i></button>
-                <button class="btn btn-outline-danger mb-2" data-toggle="modal" data-record-id="'.$row->id.'" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>';
+                <button class="btn btn-outline-danger mb-2 deleteBtn" data-toggle="modal"  data-record-id="'.$row->id.'" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>';
             })
             ->setRowId('id')
             ->rawColumns(['action']);

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCustomerRequest extends FormRequest
+class UpdateCustomerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,9 +21,8 @@ class CreateCustomerRequest extends FormRequest
      */
     public function rules(): array
     {
-        // Company Information
         return [
-            'customer_number' => 'required|string|max:255',
+            'customer_number' => 'nullable|string|max:255',
             'name' => 'required|string|max:255',
             'street_address' => 'required|string|max:255',
             'zip' => 'required|string|max:20',
@@ -34,6 +33,5 @@ class CreateCustomerRequest extends FormRequest
             'contact_person_email' => 'required|email|max:255',
             'contact_person_phone' => 'required|string|max:20',
         ];
-
     }
 }

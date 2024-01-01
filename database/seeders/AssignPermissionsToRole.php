@@ -7,7 +7,7 @@ use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class AssignPermissionToRole extends Seeder
+class AssignPermissionsToRole extends Seeder
 {
     /**
      * Run the database seeds.

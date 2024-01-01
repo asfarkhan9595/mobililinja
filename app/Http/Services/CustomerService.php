@@ -7,17 +7,6 @@ use Illuminate\Support\Facades\Log;
 
 class CustomerService
 {
-    protected $perPage;
-
-    /**
-     * CustomerService constructor.
-     *
-     * Date: 29th Dec, 2023
-     * Developer: Kaushik
-     * Purpose: Initializes the CustomerService instance.
-     */
-
-
     /**
      * Get all customers.
      *
@@ -32,6 +21,18 @@ class CustomerService
         try {
             // Fetch all the customers
             return Customer::select(['id','customer_number','name','country','city','zip','contact_person_name']);
+        } catch (\Exception $e) {
+            // Log any exceptions
+            Log::error("Error fetching all customers: {$e->getMessage()}");
+            return collect(); // Return an empty collection on error
+        }
+    }
+
+    public function  getCustomerById($id)
+    {
+        try {
+            // Fetch all the customers
+            return Customer::whereId($id)->first();
         } catch (\Exception $e) {
             // Log any exceptions
             Log::error("Error fetching all customers: {$e->getMessage()}");
@@ -54,20 +55,60 @@ class CustomerService
         try {
             // Creating Customer
             return Customer::create([
-                'customer_number' => $request->input('customer_number'),
-                'name' => $request->input('name'),
-                'street_address' => $request->input('street_address'),
-                'zip' => $request->input('zip'),
-                'city' => $request->input('city'),
-                'country' => $request->input('country'),
-                'vat' => $request->input('vat'),
-                'contact_person_name' => $request->input('contact_person_name'),
-                'contact_person_email' => $request->input('contact_person_email'),
-                'contact_person_phone' => $request->input('contact_person_phone'),
+                'customer_number' => $request->customer_number,
+                'name' => $request->name,
+                'street_address' => $request->street_address,
+                'zip' => $request->zip,
+                'city' => $request->city,
+                'country' => $request->country,
+                'vat' => $request->vat,
+                'contact_person_name' => $request->contact_person_name,
+                'contact_person_email' => $request->contact_person_email,
+                'contact_person_phone' => $request->contact_person_phone,
             ]);
         } catch (\Exception $e) {
             // Log any exceptions
             Log::error("Error creating customer: {$e->getMessage()}");
+            return false; // Return false on error
+        }
+    }
+    public function update($request, $id){
+        try {
+            // Updating Customer
+            $customer = Customer::find($id);
+            return $customer->update(
+                [
+                    'customer_number' => $request->customer_number,
+                    'name' => $request->name,
+                    'street_address' => $request->street_address,
+                    'zip' => $request->zip,
+                    'city' => $request->city,
+                    'country' => $request->country,
+                    'vat' => $request->vat,
+                    'contact_person_name' => $request->contact_person_name,
+                    'contact_person_email' => $request->contact_person_email,
+                    'contact_person_phone' => $request->contact_person_phone,
+                ]
+            );
+        } catch (\Exception $e) {
+            // Log any exceptions
+            Log::error("Error updating customer: {$e->getMessage()}");
+            return false; // Return false on error
+        }
+    }
+
+    public function delete($id){
+        try {
+            // Updating Customer
+            $customer = Customer::find($id);
+            if ($customer) {
+                $customer->delete();
+                return true;
+            }
+            return false;
+        } catch (\Exception $e) {
+            // Log any exceptions
+            Log::error("Error deleting customer: {$e->getMessage()}");
             return false; // Return false on error
         }
     }
