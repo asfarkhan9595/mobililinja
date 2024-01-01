@@ -39,15 +39,20 @@ class CustomerController extends Controller
      */
     public function store(CreateCustomerRequest $request)
     {
-        DB::beginTransaction();
-
-        try {
-
-            $this->customerService->create($request);
-            DB::commit();
-            return redirect()->route('superadmin.customer.index')->with(['message'=>trans('messages.customer-created')]);
-        }
-        catch (Exception $e) {
+         try {
+            DB::transaction(function () use ($request) {
+                $createCustomer = $this->customerService->create($request);
+                return [
+                    'createCustomer' => $createCustomer,
+                ];
+                if ($createCustomer['createCustomer']){
+                    DB::commit();
+                    return redirect()->route('superadmin.customer.index')->with(['message'=>trans('messages.customer-created')]);
+                }
+                DB::rollback();
+                return false;
+            });
+        } catch (Exception $e) {
             DB::rollBack();
             throw $e;
             return redirect()->route('superadmin.customer.index');
