@@ -7,7 +7,7 @@
         </div>
         <div class="card">
             <div class="body">
-                @include ('_back._inc.error')
+                @include ('_back._inc.message')
                 <p class="lead">Login to your account</p>
                 <form class="form-auth-small m-t-20" method="POST" action="{{ route('login') }}">
                         @csrf

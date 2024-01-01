@@ -1,0 +1,11 @@
+{
+    "login": "Logged in Successfully.",
+    "logout": "Logged out Successfully.",
+    "customer": "Customer",
+    "customer-created":"Customer created Successfully.",
+    "customer-edited":"Customer updated Successfully.",
+    "customer-deleted":"Customer deleted Successfully.",
+    "pstn-created":"PSTN created Successfully.",
+    "pstn-edited":"PSTN updated Successfully.",
+    "pstn-deleted":"PSTN deleted Successfully."
+}

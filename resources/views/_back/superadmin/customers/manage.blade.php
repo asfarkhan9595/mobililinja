@@ -37,74 +37,110 @@ Manage Customers
                 <div class="tab-content mt-0">
                     <div class="tab-pane show active" id="Customers">
                         <div class="table-responsive body">
-                            <table class="table table-hover js-basic-example dataTable table-custom spacing5">
+                            {{ $dataTable->table() }}
+                            {{-- <table class="table table-hover js-basic-example dataTable table-custom spacing5">
                                 <thead>
                                     <tr>
                                         <th>Customer number</th>
-                                        <th>Customer</th>
-                                        <th>Date</th>
-                                        <th>Type</th>
-                                        <th>Status</th>
-                                        <th class="w60">Amount</th>
+                                        <th>Name</th>
+                                        <th>Country</th>
+                                        <th>City</th>
+                                        <th>Zip</th>
+                                        <th class="w60">Contact Person</th>
                                         <th class="w60">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                    @foreach ($customers as $customer)
                                     <tr>
-                                        <td>#LA-5218</td>
-                                        <td>vPro tec LLC.</td>
-                                        <td>07 March, 2018</td>
-                                        <td><img src="https://netdesk.fi/platform/assets/images/paypal.png" class="rounded w40" alt="paypal"></td>
-                                        <td><span class="badge badge-success">Approved</span></td>
-                                        <td>$4,205</td>
+                                        <td>{{ $customer->customer_number}}</td>
+                                        <td>{{ $customer->name}}</td>
+                                        <td>{{ $customer->country}}</td>
+                                        <td>{{ $customer->city}}</td>
+                                        <td>{{ $customer->zip}}</td>
+                                        <td>{{ $customer->contact_person_name}}</td>
                                         <td>
                                             <button class="btn btn-outline-info mb-2" data-toggle="modal" data-target="#myLargeModalText"><i class="fa fa-edit"></i></button>
                                             <button class="btn btn-outline-danger mb-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>#LA-1212</td>
-                                        <td>BT Technology</td>
-                                        <td>25 Jun, 2018</td>
-                                        <td><img src="https://netdesk.fi/platform/assets/images/mastercard.png" class="rounded w40" alt="mastercard"></td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
-                                        <td>$5,205</td>
-                                        <td>
-                                            <button class="btn btn-outline-info mb-2" data-toggle="modal" data-target="#myLargeModalText"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-outline-danger mb-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#LA-0222</td>
-                                        <td>More Infoweb Pvt.</td>
-                                        <td>12 July, 2018</td>
-                                        <td><img src="https://netdesk.fi/platform/assets/images/paypal.png" class="rounded w40" alt="paypal"></td>
-                                        <td><span class="badge badge-warning">Pending</span></td>
-                                        <td>$2,000</td>
-                                        <td>
-                                            <button class="btn btn-outline-info mb-2" data-toggle="modal" data-target="#myLargeModalText"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-outline-danger mb-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>#LA-0312</td>
-                                        <td>RETO Tech LLC.</td>
-                                        <td>13 July, 2018</td>
-                                        <td><img src="https://netdesk.fi/platform/assets/images/paypal.png" class="rounded w40" alt="paypal"></td>
-                                        <td><span class="badge badge-success">Approved</span></td>
-                                        <td>$10,000</td>
-                                        <td>
-                                            <button class="btn btn-outline-info mb-2" data-toggle="modal" data-target="#myLargeModalText"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-outline-danger mb-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
-                            </table>
+                                <tfoot></tfoot>
+                            </table> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-@include ('_back.superadmin.customers.add')
+@include ('_back.superadmin.customers.create')
+@include ('_back.superadmin.customers.edit')
 @endsection
+@push('page_script')
+{{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+<script>
+    function fetchData(id) {
+        $.ajax({
+            url: '{{ route("superadmin.customer.edit", ["customer" => '+id+']) }}' ,
+            method: 'GET',
+            success: function(data) {
+            // Populate the modal input field with the fetched data
+                $('[name="name"]').val(data.name);
+                $('[name="street_address"]').val(data.street_address);
+                $('[name="zip"]').val(data.zip);
+                $('[name="city"]').val(data.city);
+                $('[name="country"]').val(data.country);
+                $('[name="vat"]').val(data.vat);
+                $('[name="contact_person_name"]').val(data.contact_person_name);
+                $('[name="contact_person_email"]').val(data.contact_person_email);
+                $('[name="contact_person_phone"]').val(data.contact_person_phone);
+            },
+            error: function(xhr, status, error) {
+            // Handle error scenarios
+            console.error(error);
+            }
+        });
+    }
+    $('body').on('click', '.editBtn', function() {
+        var id = $(this).attr('data-record-id');
+
+        // Call the function to fetch data via AJAX
+        fetchData(id);
+
+        // Display the modal
+        $('#editModal').css('display', 'block');
+    });
+    $('#saveBtn').on('click', function() {
+        var updatedData = {
+            name: $('[name="name"]').val(),
+            street_address: $('[name="street_address"]').val(),
+            zip: $('[name="zip"]').val(),
+            city: $('[name="city"]').val(),
+            country: $('[name="country"]').val(),
+            vat: $('[name="vat"]').val(),
+            contact_person_name: $('[name="contact_person_name"]').val(),
+            contact_person_email: $('[name="contact_person_email"]').val(),
+            contact_person_phone: $('[name="contact_person_phone"]').val(),
+        };
+
+        // Perform an AJAX POST request to update the data
+        $.ajax({
+            url: "{{ route('superadmin.customer.update',['id',"+id+"]) }}",
+            method: 'POST',
+            data: updatedData,
+            success: function(response) {
+            // Handle the successful update
+                console.log('Data updated successfully:', response);
+            // Close the modal
+            $('#editModal').modal('close');
+            },
+            error: function(xhr, status, error) {
+                // Handle error scenarios
+                console.error(error);
+            }
+        });
+    });
+</script>
+@endpush

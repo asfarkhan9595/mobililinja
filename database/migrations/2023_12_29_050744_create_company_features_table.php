@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('company_features', function (Blueprint $table) {
+        Schema::create('customer_features', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained();
             $table->string('pbx')->nullable();
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('company_features');
+        Schema::dropIfExists('customer_features');
     }
 };

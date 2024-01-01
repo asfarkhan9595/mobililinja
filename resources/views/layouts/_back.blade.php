@@ -250,7 +250,7 @@
         @include ('_back._inc._sidebar')
         <div id="main-content">
             <div class="container-fluid">
-                @include ('_back._inc.error')
+                @include ('_back._inc.message')
                 @yield('content')
             </div>
         </div>

@@ -2,33 +2,28 @@
 
 namespace App\Http\Controllers\Superadmin\Customer;
 
+use App\DataTables\CustomerDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Services\CustomerService;
-use App\Http\Services\CompanyFeatureService;
-use App\Http\Services\CompanyBillingService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
     private $customerService;
-    private $companyFeatureService;
-    private $companyBillingService;
-
 
     public function __construct(CustomerService $customerService){
         $this->customerService = $customerService;
-        $this->companyFeatureService = new CompanyFeatureService;
-        $this->companyBillingService = new CompanyBillingService;
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(CustomerDataTable $customerDataTable)
     {
-        return view('_back.superadmin.customers.manage');
+        return $customerDataTable->render('_back.superadmin.customers.manage');
     }
 
     /**
@@ -44,19 +39,18 @@ class CustomerController extends Controller
      */
     public function store(CreateCustomerRequest $request)
     {
-        $this->beginTransaction();
+        DB::beginTransaction();
 
         try {
 
-            $customer = $this->customerService->create($request);
-            // $feature = $this->companyFeatureService->createCompanyFeature($request);
-            // $feature = $this->companyBillingService->createCompanyBilling($request);
-
-            $this->commit();
+            $this->customerService->create($request);
+            DB::commit();
+            return redirect()->route('superadmin.customer.index')->with(['message'=>trans('messages.customer-created')]);
         }
         catch (Exception $e) {
-            $this->rollBack();
+            DB::rollBack();
             throw $e;
+            return redirect()->route('superadmin.customer.index');
         }
     }
 
