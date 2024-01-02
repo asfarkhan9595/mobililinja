@@ -55,7 +55,7 @@ class CustomerController extends Controller
             });
             if ($createCustomer['createCustomer']){
                 DB::commit();
-                return redirect()->route('superadmin.customers.index')->with(['message'=>__('customer-created')]);
+                return response()->json(['message'=>__('customer.created')]);
             }
             DB::rollback();
             return false;
@@ -63,7 +63,7 @@ class CustomerController extends Controller
         } catch (Exception $e) {
             DB::rollBack();
             $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Store Operation', request()->ip(), $e);
-            return redirect()->route('superadmin.customers.index');
+            return response()->json(['message'=>__('customer.creation.failed')]);
         }
     }
 

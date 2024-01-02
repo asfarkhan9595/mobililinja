@@ -7,7 +7,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="{{ route('superadmin.customers.store') }}" id="customerForm" method="post">
+            <form action="#" id="customerForm" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="row clearfix">
@@ -288,7 +288,7 @@
 @push('page_script')
 <script>
 $(document).ready(function () {
-    $('#customerForm, #customerEditForm').validate({
+    $('#customerForm').validate({
         rules: {
             name: { required: true },
             street_address: { required: true },
@@ -324,6 +324,47 @@ $(document).ready(function () {
                 email: "Please enter a valid email address"
             },
             contact_person_phone: "Please enter the contact person's phone number"
+        },
+        submitHandler: function(form) {
+            // Use AJAX to submit the form data
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('superadmin.customers.store')}}",
+                data: $(form).serialize(), // Serialize the form data
+                success: function(response) {
+                    // Display a success message or redirect the user
+                    if (response.errors) {
+                    // Display the overall error message
+                        showAutoDismissAlert('error',response.message,5000);
+                        // Iterate through each error and display them
+                        for (var field in response.errors) {
+                            if (response.errors.hasOwnProperty(field)) {
+                                var errorMessages = response.errors[field];
+                                // Display individual error messages
+                                errorMessages.forEach(function (errorMessage) {
+                                    // $('#main-content .container-fluid').prepend('<li>' + errorMessage + '</li>');
+                                    showAutoDismissAlert('error',errorMessage,5000);
+                                });
+                            }
+                        }
+                    }
+                    else {
+                        var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + 'Data submitted successfully' +
+                                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                        $('#main-content .container-fluid').prepend(alertHtml);
+                        // Set a timeout to remove the alert after the specified duration
+                        setTimeout(function() {
+                            $('.alert-dismissible').alert('close');
+                        }, 5000);
+                    }
+                    window.LaravelDataTables["customer-table"].ajax.reload();
+                    $('.bd-example-modal-lg').modal('hide');
+                },
+                error: function(error) {
+                    // Display an error message
+                    showAutoDismissAlert('error',"Error submitting data", 5000);
+                }
+            });
         }
     });
 });

@@ -20,3 +20,16 @@
 <script src="{{ asset('_back/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script><!-- Bootstrap Tags Input Plugin Js -->
 <script src="{{ asset('_back/vendor/nouislider/nouislider.js')}}"></script><!-- noUISlider Plugin Js -->
 <script src="{{ asset('_back/js/pages/forms/advanced-form-elements.js') }}"></script>
+<script>
+function showAutoDismissAlert(type, message, duration) {
+    // Insert the alert into the DOM
+    let class = type == 'success' ? 'success' :'danger';
+    var alertHtml = '<div class="alert alert-'+class+' mt-4 alert-dismissible fade show" role="alert">' + message +
+                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+    $('#main-content .container-fluid').prepend(alertHtml);
+    // Set a timeout to remove the alert after the specified duration
+    setTimeout(function() {
+        $('.alert-dismissible').alert('close');
+    }, duration);
+}
+</script>

@@ -56,17 +56,17 @@ Manage Customers
             url: '{{ route("superadmin.customers.edit", ["customer" => 'customer_id']) }}'.replace('customer_id',id),
             method: 'GET',
             success: function(data) {
-            // Populate the modal input field with the fetched data
-                $('[name="id"]').val(data.id);
-                $('[name="name"]').val(data.name);
-                $('[name="street_address"]').val(data.street_address);
-                $('[name="zip"]').val(data.zip);
-                $('[name="city"]').val(data.city);
-                $('[name="country"]').val(data.country);
-                $('[name="vat"]').val(data.vat);
-                $('[name="contact_person_name"]').val(data.contact_person_name);
-                $('[name="contact_person_email"]').val(data.contact_person_email);
-                $('[name="contact_person_phone"]').val(data.contact_person_phone);
+                // Populate the modal input field with the fetched data
+                $('#myLargeModalText [name="id"]').val(data.id);
+                $('#myLargeModalText [name="name"]').val(data.name);
+                $('#myLargeModalText [name="street_address"]').val(data.street_address);
+                $('#myLargeModalText [name="zip"]').val(data.zip);
+                $('#myLargeModalText [name="city"]').val(data.city);
+                $('#myLargeModalText [name="country"]').val(data.country);
+                $('#myLargeModalText [name="vat"]').val(data.vat);
+                $('#myLargeModalText [name="contact_person_name"]').val(data.contact_person_name);
+                $('#myLargeModalText [name="contact_person_email"]').val(data.contact_person_email);
+                $('#myLargeModalText [name="contact_person_phone"]').val(data.contact_person_phone);
             },
             error: function(xhr, status, error) {
             // Handle error scenarios
@@ -117,13 +117,17 @@ Manage Customers
                                 });
                             }
                         }
+                    } else {
+                        var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + 'Data updated successfully' +
+                                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                        $('#main-content .container-fluid').prepend(alertHtml);
+                        // Set a timeout to remove the alert after the specified duration
+                        setTimeout(function() {
+                            $('.alert-dismissible').alert('close');
+                        }, 5000);
+
+                        $('#myLargeModalText').modal('hide');
                     }
-                    console.log('Data updated successfully:', response);
-                    // Close the modal
-                    $('#main-content .container-fluid').prepend(
-                            '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert"> {{__('Data updated successfully')}} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
-                    )
-                    $('#myLargeModalText').modal('hide');
                     window.LaravelDataTables["customer-table"].ajax.reload();
                 },
                 error: function(xhr, status, error) {
@@ -143,9 +147,13 @@ Manage Customers
                 _token: "{{ csrf_token() }}",
             },
             success: function(response) {
-                $('#main-content .container-fluid').prepend(
-                    '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert"> {{__('Data deleted successfully')}} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
-                )
+                var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + 'Data deleted successfully' +
+                                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                $('#main-content .container-fluid').prepend(alertHtml);
+                // Set a timeout to remove the alert after the specified duration
+                setTimeout(function() {
+                    $('.alert-dismissible').alert('close');
+                }, 5000);
                 window.LaravelDataTables["customer-table"].ajax.reload();
             },
             error: function(error) {
