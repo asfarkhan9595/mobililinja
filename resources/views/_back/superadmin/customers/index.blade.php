@@ -38,37 +38,6 @@ Manage Customers
                     <div class="tab-pane show active" id="Customers">
                         <div class="table-responsive body">
                             {{ $dataTable->table() }}
-                            {{-- <table class="table table-hover js-basic-example dataTable table-custom spacing5">
-                                <thead>
-                                    <tr>
-                                        <th>Customer number</th>
-                                        <th>Name</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        <th>Zip</th>
-                                        <th class="w60">Contact Person</th>
-                                        <th class="w60">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    @foreach ($customers as $customer)
-                                    <tr>
-                                        <td>{{ $customer->customer_number}}</td>
-                                        <td>{{ $customer->name}}</td>
-                                        <td>{{ $customer->country}}</td>
-                                        <td>{{ $customer->city}}</td>
-                                        <td>{{ $customer->zip}}</td>
-                                        <td>{{ $customer->contact_person_name}}</td>
-                                        <td>
-                                            <button class="btn btn-outline-info mb-2" data-toggle="modal" data-target="#myLargeModalText"><i class="fa fa-edit"></i></button>
-                                            <button class="btn btn-outline-danger mb-2" data-toggle="modal" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                                <tfoot></tfoot>
-                            </table> --}}
                         </div>
                     </div>
                 </div>
@@ -84,7 +53,7 @@ Manage Customers
 <script>
     function fetchData(id) {
         $.ajax({
-            url: '{{ route("superadmin.customer.edit", ["customer" => 'customer_id']) }}'.replace('customer_id',id),
+            url: '{{ route("superadmin.customers.edit", ["customer" => 'customer_id']) }}'.replace('customer_id',id),
             method: 'GET',
             success: function(data) {
             // Populate the modal input field with the fetched data
@@ -115,54 +84,59 @@ Manage Customers
     $('#saveBtn').on('click', function(e) {
         e.preventDefault();
         const id = $('[name="id"]').val();
-        // Perform an AJAX POST request to update the data
-        $.ajax({
-            url: '{{ route("superadmin.customer.update",['customer' => 'customer_id']) }}'.replace('customer_id',id),
-            type: "POST",
-            data: {
-                _token: '{{ csrf_token() }}',
-                _method: "PUT",
-                name: $('#myLargeModalText [name="name"]').val(),
-                street_address: $('#myLargeModalText [name="street_address"]').val(),
-                zip: $('#myLargeModalText [name="zip"]').val(),
-                city: $('#myLargeModalText [name="city"]').val(),
-                country: $('#myLargeModalText [name="country"]').val(),
-                vat: $('#myLargeModalText [name="vat"]').val(),
-                contact_person_name: $('#myLargeModalText [name="contact_person_name"]').val(),
-                contact_person_email: $('#myLargeModalText [name="contact_person_email"]').val(),
-                contact_person_phone: $('#myLargeModalText [name="contact_person_phone"]').val(),
-            },
-            success: function(response) {
-                // Handle the successful update
-                console.log('Data updated successfully:', response);
-                // Close the modal
-                $('#main-content .container-fluid').prepend(
-                        '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert"> {{__('Data updated successfully')}} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
-                )
-                $('#myLargeModalText').modal('hide');
-                window.LaravelDataTables["customer-table"].ajax.reload();
-            },
-            error: function(xhr, status, error) {
-                // Handle error scenarios
-                console.error(error);
-            }
-        });
-    });
-    function confirmDelete(id) {
-        var result = window.confirm("__('Are you sure you want to delete this customer?')");
-
-        if (result) {
-            // User clicked "OK", proceed with the delete
-            deleteCustomer(id);
-        } else {
-            // User clicked "Cancel"
+        if($('#customerEditForm').valid()) {
+            // Perform an AJAX POST request to update the data
+            $.ajax({
+                url: '{{ route("superadmin.customers.update",['customer' => 'customer_id']) }}'.replace('customer_id',id),
+                type: "POST",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    _method: "PUT",
+                    name: $('#myLargeModalText [name="name"]').val(),
+                    street_address: $('#myLargeModalText [name="street_address"]').val(),
+                    zip: $('#myLargeModalText [name="zip"]').val(),
+                    city: $('#myLargeModalText [name="city"]').val(),
+                    country: $('#myLargeModalText [name="country"]').val(),
+                    vat: $('#myLargeModalText [name="vat"]').val(),
+                    contact_person_name: $('#myLargeModalText [name="contact_person_name"]').val(),
+                    contact_person_email: $('#myLargeModalText [name="contact_person_email"]').val(),
+                    contact_person_phone: $('#myLargeModalText [name="contact_person_phone"]').val(),
+                },
+                success: function(response) {
+                    // Handle the successful update
+                    if (response.errors) {
+                    // Display the overall error message
+                        $('#main-content .container-fluid').prepend('<li>' + response.message + '</li>');
+                        // Iterate through each error and display them
+                        for (var field in response.errors) {
+                            if (response.errors.hasOwnProperty(field)) {
+                                var errorMessages = response.errors[field];
+                                // Display individual error messages
+                                errorMessages.forEach(function (errorMessage) {
+                                    $('#main-content .container-fluid').prepend('<li>' + errorMessage + '</li>');
+                                });
+                            }
+                        }
+                    }
+                    console.log('Data updated successfully:', response);
+                    // Close the modal
+                    $('#main-content .container-fluid').prepend(
+                            '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert"> {{__('Data updated successfully')}} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
+                    )
+                    $('#myLargeModalText').modal('hide');
+                    window.LaravelDataTables["customer-table"].ajax.reload();
+                },
+                error: function(xhr, status, error) {
+                    // Handle error scenarios
+                    console.error(error);
+                }
+            });
         }
-    }
-
+    });
     function deleteCustomer(id) {
         // Make an AJAX request or submit a form to delete the customer
         $.ajax({
-            url: "{{ route('superadmin.customer.destroy', ['customer' => '__id__']) }}".replace('__id__', id),
+            url: "{{ route('superadmin.customers.destroy', ['customer' => '__id__']) }}".replace('__id__', id),
             type: "DELETE",
             data: {
                 _type : "DELETE",

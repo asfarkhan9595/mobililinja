@@ -23,7 +23,7 @@ class CreateCustomerRequest extends FormRequest
     {
         // Company Information
         return [
-            'customer_number' => 'required|string|max:255',
+            'customer_number' => 'nullable|string|max:255',
             'name' => 'required|string|max:255',
             'street_address' => 'required|string|max:255',
             'zip' => 'required|string|max:20',

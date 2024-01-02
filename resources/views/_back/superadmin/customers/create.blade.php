@@ -1,4 +1,3 @@
-<!-- larg modal -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -8,7 +7,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="{{ route('superadmin.customer.store') }}" method="post">
+            <form action="{{ route('superadmin.customers.store') }}" id="customerForm" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="row clearfix">
@@ -286,3 +285,47 @@
         </div>
     </div>
 </div>
+@push('page_script')
+<script>
+$(document).ready(function () {
+    $('#customerForm, #customerEditForm').validate({
+        rules: {
+            name: { required: true },
+            street_address: { required: true },
+            zip: {
+                required: true,
+                minlength: 5,
+                maxlength: 9
+            },
+            city: { required: true, minlength: 2 },
+            country: { required: true },
+            vat: { required: true },
+            contact_person_name: { required: true },
+            contact_person_email: {
+                required: true,
+                email: true
+            },
+            contact_person_phone: { required: true }
+        },
+        messages: {
+            name: "Please enter the customer name",
+            street_address: "Please enter the street address",
+            zip: {
+                required: "Please enter the ZIP code",
+                minlength: "ZIP code must be at least 5 characters",
+                maxlength: "ZIP code must not exceed 9 characters"
+            },
+            city: "Please enter the city",
+            country: "Please select the country",
+            vat: "Please enter the VAT",
+            contact_person_name: "Please enter the contact person's name",
+            contact_person_email: {
+                required: "Please enter the contact person's email",
+                email: "Please enter a valid email address"
+            },
+            contact_person_phone: "Please enter the contact person's phone number"
+        }
+    });
+});
+</script>
+@endpush

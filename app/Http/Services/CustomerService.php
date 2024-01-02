@@ -3,10 +3,12 @@
 namespace App\Http\Services;
 
 use App\Models\Customer;
+use App\Traits\Logger;
 use Illuminate\Support\Facades\Log;
 
 class CustomerService
 {
+    use Logger;
     /**
      * Get all customers.
      *
@@ -23,7 +25,7 @@ class CustomerService
             return Customer::select(['id','customer_number','name','country','city','zip','contact_person_name']);
         } catch (\Exception $e) {
             // Log any exceptions
-            Log::error("Error fetching all customers: {$e->getMessage()}");
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - List Operation', request()->ip(), $e);
             return collect(); // Return an empty collection on error
         }
     }
@@ -32,10 +34,15 @@ class CustomerService
     {
         try {
             // Fetch all the customers
-            return Customer::whereId($id)->first();
+            $customer = Customer::find($id);
+            if(!$customer) {
+                return false;
+            }
+            return $customer;
+
         } catch (\Exception $e) {
             // Log any exceptions
-            Log::error("Error fetching all customers: {$e->getMessage()}");
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Fetch Single', request()->ip(), $e);
             return collect(); // Return an empty collection on error
         }
     }
@@ -68,14 +75,14 @@ class CustomerService
             ]);
         } catch (\Exception $e) {
             // Log any exceptions
-            Log::error("Error creating customer: {$e->getMessage()}");
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Create Operation', request()->ip(), $e);
             return false; // Return false on error
         }
     }
-    public function update($request, $id){
+
+    // Updating Customer
+    public function update($request, $customer){
         try {
-            // Updating Customer
-            $customer = Customer::find($id);
             return $customer->update(
                 [
                     'customer_number' => $request->customer_number,
@@ -92,23 +99,18 @@ class CustomerService
             );
         } catch (\Exception $e) {
             // Log any exceptions
-            Log::error("Error updating customer: {$e->getMessage()}");
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Update Operation', request()->ip(), $e);
             return false; // Return false on error
         }
     }
 
-    public function delete($id){
+    // Deleting Customer
+    public function delete($customer){
         try {
-            // Updating Customer
-            $customer = Customer::find($id);
-            if ($customer) {
-                $customer->delete();
-                return true;
-            }
-            return false;
+            return $customer->delete();
         } catch (\Exception $e) {
             // Log any exceptions
-            Log::error("Error deleting customer: {$e->getMessage()}");
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Delete Operation', request()->ip(), $e);
             return false; // Return false on error
         }
     }

@@ -10,9 +10,11 @@ use App\Http\Services\CustomerService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Traits\Logger;
 
 class CustomerController extends Controller
 {
+    use Logger;
     private $customerService;
 
     public function __construct(CustomerService $customerService){
@@ -24,7 +26,11 @@ class CustomerController extends Controller
      */
     public function index(CustomerDataTable $customerDataTable)
     {
-        return $customerDataTable->render('_back.superadmin.customers.manage');
+        try {
+            return $customerDataTable->render('_back.superadmin.customers.index');
+        }catch(Exception $e){
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - List/Select Operation', request()->ip(), $e);
+        }
     }
 
     /**
@@ -49,14 +55,15 @@ class CustomerController extends Controller
             });
             if ($createCustomer['createCustomer']){
                 DB::commit();
-                return redirect()->route('superadmin.customer.index')->with(['message'=>trans('messages.customer-created')]);
+                return redirect()->route('superadmin.customers.index')->with(['message'=>__('customer-created')]);
             }
             DB::rollback();
             return false;
 
-        } catch (Exception) {
+        } catch (Exception $e) {
             DB::rollBack();
-            return redirect()->route('superadmin.customer.index');
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Store Operation', request()->ip(), $e);
+            return redirect()->route('superadmin.customers.index');
         }
     }
 
@@ -75,8 +82,12 @@ class CustomerController extends Controller
     {
         try {
             $customer = $this->customerService->getCustomerById($id);
+            if(!$customer) {
+                return response()->json([]);
+            }
             return response()->json($customer);
         }catch (Exception $e){
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Edit Operation', request()->ip(), $e);
             return false;
         }
     }
@@ -88,7 +99,12 @@ class CustomerController extends Controller
     {
         try {
             $updateCustomer = DB::transaction(function() use ($request, $id) {
-                $updateCustomer = $this->customerService->update($request, $id);
+                // $updateCustomer = $this->customerService->update($request, $id);
+                $customer = $this->customerService->getCustomerById($id);
+                if(!$customer) {
+                    return false;
+                }
+                $updateCustomer = $this->customerService->update($request, $customer);
                 return [
                     'updateCustomer' => $updateCustomer,
                 ];
@@ -99,10 +115,10 @@ class CustomerController extends Controller
             }
             DB::rollback();
             return false;
-
-        } catch (Exception) {
+        } catch (Exception $e) {
             DB::rollBack();
-            return redirect()->route('superadmin.customer.index');
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Update Operation', request()->ip(), $e);
+            return redirect()->route('superadmin.customers.index');
         }
     }
 
@@ -112,9 +128,13 @@ class CustomerController extends Controller
     public function destroy(string $id)
     {
         try {
-            $customer = $this->customerService->delete($id);
-            return response()->json($customer);
+            $customer = $this->customerService->getCustomerById($id);
+            if(!$customer) {
+                return false;
+            }
+            return $this->customerService->delete($customer);
         }catch (Exception $e){
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Delete Operation', request()->ip(), $e);
             return false;
         }
     }

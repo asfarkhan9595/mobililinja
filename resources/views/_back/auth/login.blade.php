@@ -9,11 +9,11 @@
             <div class="body">
                 @include ('_back._inc.message')
                 <p class="lead">Login to your account</p>
-                <form class="form-auth-small m-t-20" method="POST" action="{{ route('login') }}">
+                <form class="form-auth-small m-t-20" method="POST" action="{{ route('login') }}" id="loginForm">
                         @csrf
                     <div class="form-group">
                         <label for="signin-email" class="control-label sr-only">Email</label>
-                        <input type="email" class="form-control" id="signin-email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email" >
+                        <input type="email" class="form-control" id="signin-email" name="email" value="{{ old('email') }}" autocomplete="email" autofocus placeholder="Email" >
                         @error('email')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="signin-password" class="control-label sr-only">Password</label>
-                        <input type="password" class="form-control" id="signin-password" placeholder="Password" name="password" required autocomplete="current-password">
+                        <input type="password" class="form-control" id="signin-password" placeholder="Password" name="password" autocomplete="current-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -45,5 +45,4 @@
         </div>
     </div>
 </div>
-
 @endsection
