@@ -9,7 +9,7 @@
             <div class="body">
                 <p class="lead">Login to your account</p>
                 <form class="form-auth-small m-t-20" method="POST" action="{{ route('superadmin.dologin') }}">
-                        @csrf
+                    @csrf
                     <div class="form-group">
                         <label for="signin-email" class="control-label sr-only">Email</label>
                         <input type="email" class="form-control" id="signin-email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email" >
@@ -32,7 +32,7 @@
                         <label class="fancy-checkbox element-left">
                             <input type="checkbox">
                             <span>Remember me</span>
-                        </label>								
+                        </label>
                     </div>
                     <button type="submit" class="btn btn-info btn-block">LOGIN</button>
                     <div class="bottom">
@@ -44,5 +44,4 @@
         </div>
     </div>
 </div>
-
 @endsection

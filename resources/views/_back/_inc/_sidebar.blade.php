@@ -38,7 +38,7 @@
                 -->
                 <li class="header">SuperAdmin</li>
                 @if(auth()->user()->hasPermission(['create-customer','edit-customer','delete-customer','list-customer']))
-                <li><a href="{{ route('superadmin.customer.index') }}"><i class="icon-globe"></i><span>Customers</span></a></li>
+                <li><a href="{{ route('superadmin.customers.index') }}"><i class="icon-globe"></i><span>Customers</span></a></li>
                 @endif
                 <li><a href="#"><i class="icon-docs"></i><span>Invoices</span></a></li>
                 <li><a href="#"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>

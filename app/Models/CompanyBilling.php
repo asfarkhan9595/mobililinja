@@ -10,11 +10,11 @@ class CompanyBilling extends Model
     use HasFactory;
 
     protected $fillable = [
-        'billing_full_name',
-        'billing_card_number',
-        'billing_expiration_month',
-        'billing_expiration_year',
-        'billing_cvv',
+        'full_name',
+        'card_number',
+        'expiration_month',
+        'expiration_year',
+        'cvv',
     ];
 
     public function customer()
