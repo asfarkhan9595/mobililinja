@@ -19,11 +19,22 @@ class CustomerService
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getAllCustomers(): \Illuminate\Support\Collection
+    public function getAllCustomers()
     {
         try {
             // Fetch all the customers
             return Customer::select(['id','customer_number','name','country','city','zip','contact_person_name']);
+        } catch (\Exception $e) {
+            // Log any exceptions
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - List Operation', request()->ip(), $e);
+            return collect(); // Return an empty collection on error
+        }
+    }
+
+    public function getCustomerArray(){
+        try {
+            // Fetch all the customers
+            return Customer::pluck('name','id')->toArray();
         } catch (\Exception $e) {
             // Log any exceptions
             $this->log($e->getMessage(), auth()->id ?? '', 'Customer - List Operation', request()->ip(), $e);

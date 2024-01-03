@@ -33,6 +33,26 @@ class PermissionSeeder extends Seeder
                 'name' => 'list-customer',
                 'display_name' => 'List Customer', // optional
                 'description' => 'List the Customers/Companies', // optional
+            ],
+            [
+                'name' => 'create-pstn',
+                'display_name' => 'Create PSTN', // optional
+                'description' => 'create new PSTN', // optional
+            ],
+            [
+                'name' => 'edit-pstn',
+                'display_name' => 'Edit PSTN', // optional
+                'description' => 'edit existing PSTN', // optional
+            ],
+            [
+                'name' => 'delete-pstn',
+                'display_name' => 'Delete PSTN', // optional
+                'description' => 'delete new PSTN', // optional
+            ],
+            [
+                'name' => 'list-pstn',
+                'display_name' => 'List PSTN', // optional
+                'description' => 'List the PSTN', // optional
             ]
         ];
 
