@@ -3,10 +3,12 @@
 namespace App\Http\Services;
 
 use App\Models\Trunk;
+use App\Traits\Logger;
 use Illuminate\Support\Facades\Log;
 
 class TrunkService
 {
+    use Logger;
     /**
      * Get all trunks.
      *
@@ -31,10 +33,10 @@ class TrunkService
                 'context',
                 'transport',
                 // Add other columns if needed
-            ])->get();
+            ]);
         } catch (\Exception $e) {
             // Log any exceptions
-            Log::error("Error fetching all trunks: {$e->getMessage()}");
+            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - List Operation', request()->ip(), $e);
             return collect(); // Return an empty collection on error
         }
     }
@@ -51,9 +53,9 @@ class TrunkService
             return $trunk;
 
         } catch (\Exception $e) {
-            // Log any exceptions using Laravel's built-in Log facade
-            Log::error("Trunk -Created Operation: {$e->getMessage()}");
-            return false; // Return false on error
+            // Log any exceptions
+            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Fetch Single', request()->ip(), $e);
+            return collect(); // Return an empty collection on error
         }
     }
 
@@ -71,20 +73,20 @@ class TrunkService
         try {
             // Creating Trunk
             return Trunk::create([
-                'tname' => $request->input('tname'),
-                'description' => $request->input('description'),
-                'secret' => $request->input('secret'),
-                'authentication' => $request->input('authentication'),
-                'registration' => $request->input('registration'),
-                'sip_server' => $request->input('sip_server'),
-                'sip_secret_port' => $request->input('sip_secret_port'),
-                'context' => $request->input('context'),
-                'transport' => $request->input('transport'),
+                'tname' => $request->tname,
+                'description' => $request->description,
+                'secret' => $request->secret,
+                'authentication' => $request->authentication,
+                'registration' => $request->registration,
+                'sip_server' => $request->sip_server,
+                'sip_secret_port' => $request->sip_secret_port,
+                'context' => $request->context,
+                'transport' => $request->transport,
                 
             ]);
         } catch (\Exception $e) {
-            // Log any exceptions using Laravel's built-in Log facade
-            Log::error("Trunk -Created Operation: {$e->getMessage()}");
+            // Log any exceptions
+            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Create Operation', request()->ip(), $e);
             return false; // Return false on error
         }
     }
@@ -99,12 +101,21 @@ class TrunkService
     public function update($request, $trunk)
     {
         try {
-            $trunk->fill($request->all())->save();
-            
-            return true; // Return true on successful update
+            return $trunk->update([
+                'tname' => $request->tname,
+                'description' => $request->description,
+                'secret' => $request->secret,
+                'authentication' => $request->authentication,
+                'registration' => $request->registration,
+                'sip_server' => $request->sip_server,
+                'sip_secret_port' => $request->sip_secret_port,
+                'context' => $request->context,
+                'transport' => $request->transport,
+            ]);
+
         } catch (\Exception $e) {
-            // Log any exceptions using Laravel's built-in Log facade
-            Log::error("Trunk - Update Operation: {$e->getMessage()}");
+            // Log any exceptions
+            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Update Operation', request()->ip(), $e);
             return false; // Return false on error
         }
     
@@ -113,8 +124,8 @@ class TrunkService
         try {
             return $trunk->delete();
         } catch (\Exception $e) {
-            // Log any exceptions using Laravel's built-in Log facade
-            Log::error("Trunk - Deleted Operation: {$e->getMessage()}");
+            // Log any exceptions
+            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Delete Operation', request()->ip(), $e);
             return false; // Return false on error
         }
     }

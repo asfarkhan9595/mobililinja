@@ -10,11 +10,13 @@ use App\Http\Requests\Trunk\UpdateTrunkRequest;
 use App\Http\Services\TrunkService;
 use App\Models\Trunk;
 use Exception;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
+use App\Traits\Logger;
+use App\Traits\Response;
 use Illuminate\Support\Facades\DB;
+
 class TrunkController extends Controller
 { 
+    use Logger, Response;
     private $trunkService;
 
     public function __construct(TrunkService $trunkService){
@@ -58,6 +60,9 @@ class TrunkController extends Controller
             return redirect()->route('superadmin.trunks.index')->with(['error' => __('messages.trunk-creation-error')]);
         }
     }
+    
+    
+    
     /**
      * Display the specified resource.
      */
@@ -113,10 +118,7 @@ class TrunkController extends Controller
         return response()->json(['error' => trans('messages.trunk-update-error')], 500);
     }
 }
-    protected function log($message, $userId, $operation, $ip, Exception $exception = null)
-    {
-        // Your logging logic here
-    }
+
     /**
      * Remove the specified resource from storage.
      */

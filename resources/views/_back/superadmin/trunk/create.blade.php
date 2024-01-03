@@ -10,7 +10,7 @@
                 </button>
             </div>
 
-            <form action="" id="trunkForm" method="post">
+            <form action="" id="customerForm" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="row clearfix">
@@ -129,45 +129,47 @@ $(document).ready(function () {
             transport: "Please enter the transport",
         },
         submitHandler: function(form) {
-            // Use AJAX to submit the form data
-            $.ajax({
-                type: 'POST',
-                url: "{{ route('superadmin.trunks.store')}}",
-                data: $(form).serialize(), // Serialize the form data
-                success: function(response) {
-                    // Display a success message or redirect the user
-                    if (response.errors) {
-                        // Display the overall error message
-                        showAutoDismissAlert('error', response.message, 5000);
-                        // Iterate through each error and display them
-                        for (var field in response.errors) {
-                            if (response.errors.hasOwnProperty(field)) {
-                                var errorMessages = response.errors[field];
-                                // Display individual error messages
-                                errorMessages.forEach(function (errorMessage) {
-                                    showAutoDismissAlert('error', errorMessage, 5000);
-                                });
-                            }
-                        }
-                    } else {
-                        var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + 'Data submitted successfully' +
-                                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-                        $('#main-content .container-fluid').prepend(alertHtml);
-                        // Set a timeout to remove the alert after the specified duration
-                        setTimeout(function() {
-                            $('.alert-dismissible').alert('close');
-                        }, 5000);
+    // Use AJAX to submit the form data
+    $.ajax({
+        type: 'POST',
+        url: "{{ route('superadmin.trunks.store')}}",
+        data: $(form).serialize(), // Serialize the form data
+        success: function(response) {
+            // Display a success message or redirect the user
+            if (response.errors) {
+                // Display the overall error message
+                showAutoDismissAlert('error', response.message, 5000);
+                // Iterate through each error and display them
+                for (var field in response.errors) {
+                    if (response.errors.hasOwnProperty(field)) {
+                        var errorMessages = response.errors[field];
+                        // Display individual error messages
+                        errorMessages.forEach(function (errorMessage) {
+                            showAutoDismissAlert('error', errorMessage, 5000);
+                        });
                     }
-                    window.LaravelDataTables["trunk-table"].ajax.reload();
-                    $('.bd-example-modal-lg').modal('hide');
-                },
-                error: function(error) {
-                    // Display an error message
-                    showAutoDismissAlert('error', "Error submitting data", 5000);
                 }
-            });
+            } else {
+                var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + 'Data submitted successfully' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                $('#main-content .container-fluid').prepend(alertHtml);
+
+                // Set a timeout to remove the alert after the specified duration
+                setTimeout(function() {
+                    $('.alert-dismissible').alert('close');
+                }, 5000);
+
+                // Reload the data table after successful creation
+                window.LaravelDataTables["trunk-table"].ajax.reload();
+                $('.bd-example-modal-lg').modal('hide');
+            }
+        },
+        error: function(error) {
+            // Display an error message
+            showAutoDismissAlert('error', "Error submitting data", 5000);
         }
     });
-});
+}
+
 </script>
 @endpush

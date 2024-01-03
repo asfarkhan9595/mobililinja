@@ -115,38 +115,47 @@
                         transport: $('#myLargeModalText [name="transport"]').val(),
                     },
                     success: function(response) {
-                        // Handle the successful update
-                        if (response.errors) {
-                            // Display the overall error message
-                            $('#main-content .container-fluid').prepend('<li>' + response.message +
-                                '</li>');
-                            // Iterate through each error and display them
-                            for (var field in response.errors) {
-                                if (response.errors.hasOwnProperty(field)) {
-                                    var errorMessages = response.errors[field];
-                                    // Display individual error messages
-                                    errorMessages.forEach(function(errorMessage) {
-                                        $('#main-content .container-fluid').prepend('<li>' +
-                                            errorMessage + '</li>');
-                                    });
-                                }
-                            }
+                // Handle the successful update
+                if (response.errors) {
+                    // Display the overall error message
+                    $('#main-content .container-fluid').prepend('<li>' + response.message +
+                        '</li>');
+                    // Iterate through each error and display them
+                    for (var field in response.errors) {
+                        if (response.errors.hasOwnProperty(field)) {
+                            var errorMessages = response.errors[field];
+                            // Display individual error messages
+                            errorMessages.forEach(function(errorMessage) {
+                                $('#main-content .container-fluid').prepend('<li>' +
+                                    errorMessage + '</li>');
+                            });
                         }
-                        console.log('Dataaaa updated successfully:', response);
-                        // Close the modal
-                        $('#main-content .container-fluid').prepend(
-                            '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert"> {{ __('Data updated successfully') }} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
-                        )
-                        $('.bd-example-modal-lg').modal('hide');
-                        window.LaravelDataTables["trunk-table"].ajax.reload();
-                    },
-                    error: function(xhr, status, error) {
-                        // Handle error scenarios
-                        console.error(error);
                     }
-                });
+                } else {
+                    console.log('Data updated successfully:', response);
+                    // Display success message and remove after 5 seconds
+                    var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + '{{ __('Trunk updated successfully') }}' +
+                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                    $('#main-content .container-fluid').prepend(alertHtml);
+
+                    // Set a timeout to remove the alert after the specified duration
+                    setTimeout(function() {
+                        $('.alert-dismissible').alert('close');
+                    }, 5000);
+
+                    // Close the modal
+                    $('.bd-example-modal-lg').modal('hide');
+                    // Reload the data table
+                    window.LaravelDataTables["trunk-table"].ajax.reload();
+                }
+            },
+            error: function(xhr, status, error) {
+                // Handle error scenarios
+                console.error(error);
             }
         });
+    }
+});
 
         function deleteTrunk(id) {
     // Make an AJAX request to delete the trunk
@@ -162,8 +171,8 @@
             console.log(response);
 
             // Check if the server returns a success message
-            if (response && response.message === 'Data deleted successfully') {
-                var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + 'Data Delete successfully' +
+            if (response && response.message === 'Trunkdeleted successfully') {
+                var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + 'Trunk Delete successfully' +
                                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
                         $('#main-content .container-fluid').prepend(alertHtml);
                         // Set a timeout to remove the alert after the specified duration
