@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\CreateCustomerRequest;
 use App\Http\Requests\Customer\UpdateCustomerRequest;
 use App\Http\Services\CustomerService;
+use App\Traits\Response;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ use App\Traits\Logger;
 
 class CustomerController extends Controller
 {
-    use Logger;
+    use Logger, Response;
     private $customerService;
 
     public function __construct(CustomerService $customerService){
@@ -44,7 +45,7 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateCustomerRequest $request)
+    public function store(CreateCustomerRequest $request): \Illuminate\Http\JsonResponse
     {
          try {
              $createCustomer = DB::transaction(function () use ($request) {
@@ -55,15 +56,14 @@ class CustomerController extends Controller
             });
             if ($createCustomer['createCustomer']){
                 DB::commit();
-                return response()->json(['message'=>__('customer.created')]);
+                return$this->createResponse('success',__('customer.created'));
             }
             DB::rollback();
-            return false;
-
+            return $this->createResponse('error',__('customer.creation.failed'));
         } catch (Exception $e) {
             DB::rollBack();
             $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Store Operation', request()->ip(), $e);
-            return response()->json(['message'=>__('customer.creation.failed')]);
+            return $this->createResponse('error',__('something_went_wrong'));
         }
     }
 
@@ -83,27 +83,26 @@ class CustomerController extends Controller
         try {
             $customer = $this->customerService->getCustomerById($id);
             if(!$customer) {
-                return response()->json([]);
+                return $this->createResponse('error',__('customer.not_found'));
             }
-            return response()->json($customer);
+            return $this->createResponse('success',null,['data'=> $customer]);
         }catch (Exception $e){
             $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Edit Operation', request()->ip(), $e);
-            return false;
+            return $this->createResponse('error',__('something_went_wrong'));
         }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCustomerRequest $request, string $id)
+    public function update(UpdateCustomerRequest $request, string $id): \Illuminate\Http\JsonResponse
     {
         try {
-            $updateCustomer = DB::transaction(function() use ($request, $id) {
-                // $updateCustomer = $this->customerService->update($request, $id);
-                $customer = $this->customerService->getCustomerById($id);
-                if(!$customer) {
-                    return false;
-                }
+            $customer = $this->customerService->getCustomerById($id);
+            if(!$customer) {
+                return $this->createResponse('error',__('customer.not_found'));
+            }
+            $updateCustomer = DB::transaction(function() use ($request, $customer) {
                 $updateCustomer = $this->customerService->update($request, $customer);
                 return [
                     'updateCustomer' => $updateCustomer,
@@ -111,31 +110,42 @@ class CustomerController extends Controller
             });
             if ($updateCustomer['updateCustomer']){
                 DB::commit();
-                return redirect()->route('superadmin.customer.index')->with(['message'=>trans('messages.customer-created')]);
+                return $this->createResponse('success',__('customer.updated'));
             }
             DB::rollback();
-            return false;
+            return $this->createResponse('error',__('customer.update.failed'));
         } catch (Exception $e) {
             DB::rollBack();
             $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Update Operation', request()->ip(), $e);
-            return redirect()->route('superadmin.customers.index');
+            return $this->createResponse('error',__('something_went_wrong'));
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): \Illuminate\Http\JsonResponse
     {
         try {
             $customer = $this->customerService->getCustomerById($id);
             if(!$customer) {
-                return false;
+                return $this->createResponse('error',__('customer.not_found'));
             }
-            return $this->customerService->delete($customer);
+            $deleteCustomer = DB::transaction(function() use ($customer) {
+                $deleteCustomer = $this->customerService->delete($customer);
+                return [
+                    'deleteCustomer' => $deleteCustomer,
+                ];
+            });
+            if ($deleteCustomer['deleteCustomer']){
+                DB::commit();
+                return $this->createResponse('success',__('customer.deleted'));
+            }
+            DB::rollback();
+            return $this->createResponse('error',__('customer.delete.failed'));
         }catch (Exception $e){
             $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Delete Operation', request()->ip(), $e);
-            return false;
+            return $this->createResponse('error',__('something_went_wrong'));
         }
     }
 }

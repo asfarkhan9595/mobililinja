@@ -4,6 +4,7 @@ namespace App\Http\Services;
 
 use App\Models\Customer;
 use App\Traits\Logger;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class CustomerService
@@ -16,9 +17,9 @@ class CustomerService
      * Developer: Kaushik
      * Purpose: Retrieves all customers with specified fields and paginates the results.
      *
-     * @return \Illuminate\Pagination\LengthAwarePaginator
+     * @return \Illuminate\Support\Collection
      */
-    public function getAllCustomers()
+    public function getAllCustomers(): \Illuminate\Support\Collection
     {
         try {
             // Fetch all the customers
@@ -57,7 +58,7 @@ class CustomerService
      * @param \Illuminate\Http\Request $request
      * @return \App\Models\Customer|false
      */
-    public function create($request)
+    public function create(Request $request): Customer|bool
     {
         try {
             // Creating Customer
