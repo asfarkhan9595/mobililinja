@@ -11,6 +11,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use App\Http\Services\CustomerService;
+use App\Http\Services\TrunkService;
 use App\Models\Trunk;
 
 class TrunkDataTable extends DataTable
@@ -19,20 +20,20 @@ class TrunkDataTable extends DataTable
 
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', function($row){
-                return '<button class="btn btn-outline-info mb-2 editBtn" data-toggle="modal" data-target="#myLargeModalText" data-record-id="'.$row->id.'"><i class="fa fa-edit"></i></button>
-                <button class="btn btn-outline-danger mb-2 deleteBtn" data-toggle="modal"  data-record-id="'.$row->id.'" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>';
-            })
-            ->setRowId('id')
-            ->rawColumns(['action']);
+        ->addColumn('action', function($row){
+            return '<button class="btn btn-outline-info mb-2 editBtn" data-toggle="modal" data-target="#myLargeModalText" data-record-id="'.$row->id.'"><i class="fa fa-edit"></i></button>
+            <button class="btn btn-outline-danger mb-2 deleteBtn" data-toggle="modal"  data-record-id="'.$row->id.'" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>';
+        })
+        ->setRowId('id')
+        ->rawColumns(['action']);
     }
 
     
 
     public function query(Trunk $model)
     {
-        // Replace with your logic to get trunks
-        return $model->select(['id', 'tname', 'description', 'secret', 'authentication', 'registration', 'sip_server', 'sip_secret_port', 'context', 'transport']);
+        $trunkService = new TrunkService;
+        return $trunkService->getAllTrunks();
     }
 
     public function html(): HtmlBuilder

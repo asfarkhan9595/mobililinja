@@ -35,4 +35,20 @@ class CreateTrunkRequest extends FormRequest
             // Add other rules for additional fields if needed
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'tname.required' => __('validation.tname.required'),
+            'description.required' => __('validation.description.required'),
+            'secret.required' => __('validation.secret.required'),
+            'authentication.required' => __('validation.authentication.required'),
+            'registration.required' => __('validation.registration.required'),
+            'sip_server.required' => __('validation.sip_server.required'),
+            'sip_secret_port.required' => __('validation.sip_secret_port.required'),
+            'context.required' => __('validation.context.required'),
+            'transport.required' => __('validation.transport.required'),
+        ];
+        
+    }
 }

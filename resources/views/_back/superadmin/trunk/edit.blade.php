@@ -1,5 +1,5 @@
 <!-- larg modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="myLargeModalText"
+<div class="modal fade" id="myLargeModalText" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" 
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -10,7 +10,7 @@
                 </button>
             </div>
 
-            <form action="" method="post" id="trunkEditForm">
+            <form action="#" method="post" id="trunkEditForm">
                 @csrf
                 <div class="modal-body">
                     <div class="row clearfix">
@@ -26,9 +26,9 @@
                                             <div class="body demo-card">
                                                 <div class="row clearfix">
                                                     <div class="col-lg-4 col-md-12">
-                                                        <input type="hidden" class="form-control" name="id">
                                                         <label>Trunk name</label>
                                                         <div class="form-group">
+                                                            <input type="hidden" class="form-control" name="id">
                                                             <input type="text" class="form-control" name="tname"
                                                                 value="{{ old('tname') }}">
                                                         </div>

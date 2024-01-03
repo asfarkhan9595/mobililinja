@@ -4,8 +4,9 @@ namespace App\Http\Services;
 
 use App\Models\Trunk;
 use App\Traits\Logger;
+use Illuminate\Contracts\Auth\Factory;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Http\Request;
 class TrunkService
 {
     use Logger;
@@ -68,7 +69,7 @@ class TrunkService
      * @param \Illuminate\Http\Request $request
      * @return \App\Models\Trunk|false
      */
-    public function create($request)
+    public function create(Request $request): Trunk|bool
     {
         try {
             // Creating Trunk

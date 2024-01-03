@@ -1,6 +1,6 @@
 @extends('layouts._back')
 @section('title')
-    Manage Customers
+    Manage Trunk
 @endsection
 @push('page_style')
     <style>
@@ -63,34 +63,34 @@
     <script>
         function fetchData(id) {
             $.ajax({
-                url: '{{ route('superadmin.trunks.edit', ['trunk' => 'trunk_id']) }}'.replace('trunk_id', id),
+                url: "{{ route('superadmin.trunks.edit', ['trunk' => 'trunk_id']) }}".replace('trunk_id', id),
                 method: 'GET',
-                success: function(data) {
+                success: function(response) {
                     // Populate the modal input field with the fetched data
-                    $('#myLargeModalText [name="id"]').val(data.id);
-                    $('#myLargeModalText [name="tname"]').val(data.tname);
-                    $('#myLargeModalText [name="description"]').val(data.description);
-                    $('#myLargeModalText [name="authentication"]').val(data.authentication);
-                    $('#myLargeModalText [name="secret"]').val(data.secret);
-                    $('#myLargeModalText [name="registration"]').val(data.registration);
-                    $('#myLargeModalText [name="sip_server"]').val(data.sip_server);
-                    $('#myLargeModalText [name="sip_secret_port"]').val(data.sip_secret_port);
-                    $('#myLargeModalText [name="context"]').val(data.context);
-                    $('#myLargeModalText [name="transport"]').val(data.transport);
+                    $('#myLargeModalText [name="id"]').val(response.data.id);
+                    $('#myLargeModalText [name="tname"]').val(response.data.tname);
+                    $('#myLargeModalText [name="description"]').val(response.data.description);
+                    $('#myLargeModalText [name="authentication"]').val(response.data.authentication);
+                    $('#myLargeModalText [name="secret"]').val(response.data.secret);
+                    $('#myLargeModalText [name="registration"]').val(response.data.registration);
+                    $('#myLargeModalText [name="sip_server"]').val(response.data.sip_server);
+                    $('#myLargeModalText [name="sip_secret_port"]').val(response.data.sip_secret_port);
+                    $('#myLargeModalText [name="context"]').val(response.data.context);
+                    $('#myLargeModalText [name="transport"]').val(response.data.transport);
                 },
-            error: function(xhr, status, error) {
-            // Handle error scenarios
-            console.error(error);
-            }
+                error: function(xhr, status, error) {
+                    // Handle error scenarios
+                    console.error(error);
+                }
+            });
+        }
+        $('body').on('click', '.editBtn', function() {
+            const id = $(this).attr('data-record-id');
+            // Call the function to fetch data via AJAX
+            fetchData(id);
+            // Display the modal
+            $('#editModal').css('display', 'block');
         });
-    }
-    $('body').on('click', '.editBtn', function() {
-        const id = $(this).attr('data-record-id');
-        // Call the function to fetch data via AJAX
-        fetchData(id);
-        // Display the modal
-        $('#editModal').css('display', 'block');
-    });
 
         $('#saveBtn').on('click', function(e) {
             e.preventDefault();
@@ -98,9 +98,8 @@
             if ($('#trunkEditForm').valid()) {
                 // Perform an AJAX POST request to update the data
                 $.ajax({
-                    url: '{{ route('superadmin.trunks.update', ['trunk' => 'trunk_id']) }}'.replace(
-                        'trunk_id', id),
-                    type: "PUT",
+                    url: "{{ route('superadmin.trunks.update', ['trunk' => 'trunk_id']) }}".replace('trunk_id', id),
+                    type: "POST",
                     data: {
                         _token: '{{ csrf_token() }}',
                         _method: "PUT",
@@ -115,101 +114,160 @@
                         transport: $('#myLargeModalText [name="transport"]').val(),
                     },
                     success: function(response) {
-                // Handle the successful update
-                if (response.errors) {
-                    // Display the overall error message
-                    $('#main-content .container-fluid').prepend('<li>' + response.message +
-                        '</li>');
-                    // Iterate through each error and display them
-                    for (var field in response.errors) {
-                        if (response.errors.hasOwnProperty(field)) {
-                            var errorMessages = response.errors[field];
-                            // Display individual error messages
-                            errorMessages.forEach(function(errorMessage) {
-                                $('#main-content .container-fluid').prepend('<li>' +
-                                    errorMessage + '</li>');
-                            });
+                        // Handle the successful update
+                        if (response.errors) {
+                            // Display the overall error message
+                            $('#main-content .container-fluid').prepend('<li>' + response.message +
+                                '</li>');
+                            // Iterate through each error and display them
+                            for (var field in response.errors) {
+                                if (response.errors.hasOwnProperty(field)) {
+                                    var errorMessages = response.errors[field];
+                                    // Display individual error messages
+                                    errorMessages.forEach(function(errorMessage) {
+                                        $('#main-content .container-fluid').prepend('<li>' +
+                                            errorMessage + '</li>');
+                                    });
+                                }
+                            }
+                        } else {
+
+                            // Display success message and remove after 5 seconds
+                            var alertHtml =
+                                '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' +
+                                'Data updated successfully' +
+                                '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                            $('#main-content .container-fluid').prepend(alertHtml);
+
+                            // Set a timeout to remove the alert after the specified duration
+                            setTimeout(function() {
+                                $('.alert-dismissible').alert('close');
+                            }, 5000);
+
+                            // Close the modal
+                            $('#myLargeModalText').modal('hide');
                         }
+                        // Reload the data table
+                        window.LaravelDataTables["trunk-table"].ajax.reload();
+
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error scenarios
+                        showAutoDismissAlert('error', "Error submitting data", 5000);
                     }
-                } else {
-                    console.log('Data updated successfully:', response);
-                    // Display success message and remove after 5 seconds
-                    var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + '{{ __('Trunk updated successfully') }}' +
+                });
+            }
+        });
+        $('#trunkEditForm').validate({
+    rules: {
+        tname: {
+            required: true
+        },
+        description: {
+            required: true
+        },
+        secret: {
+            required: true
+        },
+        authentication: {
+            required: true
+        },
+        registration: {
+            required: true
+        },
+        sip_server: {
+            required: true
+        },
+        sip_secret_port: {
+            required: true,
+            digits: true  // Ensure it is a positive integer
+        },
+        context: {
+            required: true
+        },
+        transport: {
+            required: true
+        },
+    },
+    messages: {
+        tname: {
+            required: "Please enter the trunk name"
+        },
+        description: {
+            required: "Please enter the description"
+        },
+        secret: {
+            required: "Please enter the secret"
+        },
+        authentication: {
+            required: "Please enter the authentication"
+        },
+        registration: {
+            required: "Please enter the registration"
+        },
+        sip_server: {
+            required: "Please enter the SIP server"
+        },
+        sip_secret_port: {
+            required: "Please enter the SIP secret port"
+        },
+        context: {
+            required: "Please enter the context"
+        },
+        transport: {
+            required: "Please enter the transport"
+        },
+    },
+    errorPlacement: function (error, element) {
+        // Customize the placement of error messages
+        error.insertAfter(element); // Default behavior: display the error after the input field
+    },
+    // Add any other options or callback functions as needed
+});
+
+        function deleteTrunk(id) {
+            // Make an AJAX request to delete the trunk
+            $.ajax({
+                url: "{{ route('superadmin.trunks.destroy', ['trunk' => '__id__']) }}".replace('__id__', id),
+                type: "DELETE",
+                data: {
+                    _method: "DELETE",
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function(response) {
+                    var alertHtml =
+                        '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' +
+                        'Data deleted successfully' +
                         '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
                     $('#main-content .container-fluid').prepend(alertHtml);
-
                     // Set a timeout to remove the alert after the specified duration
                     setTimeout(function() {
                         $('.alert-dismissible').alert('close');
                     }, 5000);
-
-                    // Close the modal
-                    $('.bd-example-modal-lg').modal('hide');
-                    // Reload the data table
                     window.LaravelDataTables["trunk-table"].ajax.reload();
+                },
+                error: function(error) {
+                    console.log(error.responseJSON.message);
                 }
-            },
-            error: function(xhr, status, error) {
-                // Handle error scenarios
-                console.error(error);
-            }
-        });
-    }
-});
-
-        function deleteTrunk(id) {
-    // Make an AJAX request to delete the trunk
-    $.ajax({
-        url: "{{ route('superadmin.trunks.destroy', ['trunk' => '__id__']) }}".replace('__id__', id),
-        type: "DELETE",
-        data: {
-            _method: "DELETE",
-            _token: "{{ csrf_token() }}",
-        },
-        success: function(response) {
-            // Check the response from the server
-            console.log(response);
-
-            // Check if the server returns a success message
-            if (response && response.message === 'Trunkdeleted successfully') {
-                var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + 'Trunk Delete successfully' +
-                                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
-                        $('#main-content .container-fluid').prepend(alertHtml);
-                        // Set a timeout to remove the alert after the specified duration
-                        setTimeout(function() {
-                            $('.alert-dismissible').alert('close');
-                        }, 5000);
-                // Reload the data table
-                window.LaravelDataTables["trunk-table"].ajax.reload();
-            } else {
-                // Handle the case where deletion failed
-                console.error('Deletion failed:', response);
-            }
-        },
-        error: function(error) {
-            // Handle AJAX request errors
-            console.log('AJAX request error:', error);
+            });
         }
-    });
-}
 
-// Open the confirm modal when needed
-$('body').on('click', '.btn-outline-danger', function() {
-    let itemId = $(this).data('record-id');
-    // Attach the ID to the delete button
-    $('#confirmDeleteTrunkBtn').attr('item-id', itemId);
-    // Show the confirm modal
-    $('#exampleModalCenter').modal('show');
-});
+        // Open the confirm modal when needed
+        $('body').on('click', '.deleteBtn', function() {
+            let itemId = $(this).data('record-id');
+            // Attach the ID to the delete button
+            $('#confirmDeleteBtn').attr('item-id', itemId);
+            // Show the confirm modal
+            $('#exampleModalCenter').modal('show');
+        });
 
-// Handle the delete action when the user clicks "Delete"
-$('body').on('click', '#confirmDeleteTrunkBtn', function() {
-    // Retrieve the attached ID
-    var id = $(this).attr('item-id');
-    deleteTrunk(id);
-    // Close the confirm modal
-    $('#exampleModalCenter').modal('hide');
-});
-
+        // Handle the delete action when the user clicks "Delete"
+        $('body').on('click', '#confirmDeleteBtn', function() {
+            // Retrieve the attached ID
+            var id = $(this).attr('item-id');
+            deleteTrunk(id);
+            // Close the confirm modal
+            $('#exampleModalCenter').modal('hide');
+        });
     </script>
 @endpush

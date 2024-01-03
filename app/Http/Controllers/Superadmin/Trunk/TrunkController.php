@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Superadmin\Trunk;
-use App\DataTables\CustomerDataTable;
+
 use App\DataTables\TrunkDataTable;
-use App\Http\Requests\Customer\CreateCustomerRequest;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Trunk\CreateTrunkRequest;
 use App\Http\Requests\Trunk\UpdateTrunkRequest;
 use App\Http\Services\TrunkService;
-use App\Models\Trunk;
+
 use Exception;
 use App\Traits\Logger;
 use App\Traits\Response;
@@ -45,20 +45,26 @@ class TrunkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateTrunkRequest $request)
+    public function store(CreateTrunkRequest $request): \Illuminate\Http\JsonResponse
     {
         try {
-            $createTrunk = $this->trunkService->create($request);
-    
-            if ($createTrunk) {
-                return redirect()->route('superadmin.trunks.index')->with(['message' => __('trunk-created')]);
-            }
-    
-            return redirect()->route('superadmin.trunks.index')->with(['error' => __('messages.trunk-creation-failed')]);
-        } catch (\Exception $e) {
-            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - List Operation', request()->ip(), $e);
-            return redirect()->route('superadmin.trunks.index')->with(['error' => __('messages.trunk-creation-error')]);
-        }
+            $createTrunk = DB::transaction(function () use ($request) {
+                $createTrunk = $this->trunkService->create($request);
+               return [
+                   'createCustomer' => $createTrunk,
+               ];
+           });
+           if ($createTrunk['createCustomer']){
+               DB::commit();
+               return$this->createResponse('success',__('trunk.created'));
+           }
+           DB::rollback();
+           return $this->createResponse('error',__('trunk.creation.failed'));
+       } catch (Exception $e) {
+           DB::rollBack();
+           $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Store Operation', request()->ip(), $e);
+           return $this->createResponse('error',__('something_went_wrong'));
+       }
     }
     
     
@@ -77,18 +83,16 @@ class TrunkController extends Controller
 
      public function edit(string $id)
      {
-         try {
-             $trunk = $this->trunkService->getTrunkById($id);
-     
-             if (!$trunk) {
-                 return response()->json(['error' => 'Trunk not found'], 404);
-             }
-     
-             return response()->json($trunk, 200);
-         } catch (Exception $e) {
-             $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Edit Operation', request()->ip(), $e);
-             return response()->json(['error' => 'Internal Server Error'], 500);
-         }
+        try {
+            $trunk = $this->trunkService->getTrunkById($id);
+            if(!$trunk) {
+                return $this->createResponse('error',__('trunk.not_found'));
+            }
+            return $this->createResponse('success',null, $trunk);
+        }catch (Exception $e){
+            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Edit Operation', request()->ip(), $e);
+            return $this->createResponse('error',__('something_went_wrong'));
+        }
      }
      
      
@@ -100,46 +104,53 @@ class TrunkController extends Controller
     
     try {
         $trunk = $this->trunkService->getTrunkById($id);
-
-        if (!$trunk) {
-            return response()->json(['error' => 'Trunk not found'], 404);
+        if(!$trunk) {
+            return $this->createResponse('error',__('customer.not_found'));
         }
-
-        $updateTrunk = $this->trunkService->update($request, $trunk);
-
-        if (!$updateTrunk) {
-            return response()->json(['error' => 'Trunk update failed'], 500);
+        $updateTrunk = DB::transaction(function() use ($request, $trunk) {
+            $updateTrunk = $this->trunkService->update($request, $trunk);
+            return [
+                'updateTrunk' => $updateTrunk,
+            ];
+        });
+        if ($updateTrunk['updateTrunk']){
+            DB::commit();
+            return $this->createResponse('success',__('trunk.updated'));
         }
-
-        // If you're in an API context, you might return a success JSON response here
-        return response()->json(['message' => trans('messages.trunk-updated')], 200);
+        DB::rollback();
+        return $this->createResponse('error',__('trunk.update.failed'));
     } catch (Exception $e) {
+        DB::rollBack();
         $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Update Operation', request()->ip(), $e);
-        return response()->json(['error' => trans('messages.trunk-update-error')], 500);
+        return $this->createResponse('error',__('something_went_wrong'));
     }
 }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($trunk)
+    public function  destroy(string $id): \Illuminate\Http\JsonResponse
     {
         try {
-            // Retrieve the Trunk model using the provided $trunk parameter
-            $trunkModel = Trunk::findOrFail($trunk);
-
-            $result = $this->trunkService->delete($trunkModel);
-
-            if ($result) {
-                // Return a success response or redirect as needed
-                return response()->json(['message' => 'Data deleted successfully']);
-            } else {
-                // Return an error response or handle the error scenario
-                return response()->json(['error' => 'Failed to delete data'], 500);
+            $trunk = $this->trunkService->getTrunkById($id);
+            if(!$trunk) {
+                return $this->createResponse('error',__('trunk.not_found'));
             }
-        } catch (\Exception $e) {
-            // Handle exceptions (e.g., Trunk model not found)
-            return response()->json(['error' => $e->getMessage()], 404);
+            $deleteTrunk = DB::transaction(function() use ($trunk) {
+                $deleteTrunk = $this->trunkService->delete($trunk);
+                return [
+                    'deleteCustomer' => $deleteTrunk,
+                ];
+            });
+            if ($deleteTrunk['deleteCustomer']){
+                DB::commit();
+                return $this->createResponse('success',__('trunk.deleted'));
+            }
+            DB::rollback();
+            return $this->createResponse('error',__('trunk.delete.failed'));
+        }catch (Exception $e){
+            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Delete Operation', request()->ip(), $e);
+            return $this->createResponse('error',__('something_went_wrong'));
         }
     }
 }
