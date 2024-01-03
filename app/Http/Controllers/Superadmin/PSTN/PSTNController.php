@@ -28,7 +28,7 @@ class PSTNController extends Controller
     public function index(PSTNDataTable $PSTNDataTable)
     {
         $customerService = new CustomerService();
-        $customers = $customerService->getCustomerArray();
+        $customers = $customerService->getAllCustomers()->pluck('name','id')->toArray();
         return $PSTNDataTable->render('_back.superadmin.pstn.index',compact('customers'));
     }
 

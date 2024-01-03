@@ -31,17 +31,6 @@ class CustomerService
         }
     }
 
-    public function getCustomerArray(){
-        try {
-            // Fetch all the customers
-            return Customer::pluck('name','id')->toArray();
-        } catch (\Exception $e) {
-            // Log any exceptions
-            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - List Operation', request()->ip(), $e);
-            return collect(); // Return an empty collection on error
-        }
-    }
-
     public function  getCustomerById($id)
     {
         try {
