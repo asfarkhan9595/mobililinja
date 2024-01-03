@@ -10,7 +10,7 @@
                 </button>
             </div>
 
-            <form action="" id="customerForm" method="post">
+            <form action="" id="trunkForm" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="row clearfix">
@@ -132,7 +132,7 @@ $(document).ready(function () {
             // Use AJAX to submit the form data
             $.ajax({
                 type: 'POST',
-                url: "{{ route('superadmin.trunk.store')}}",
+                url: "{{ route('superadmin.trunks.store')}}",
                 data: $(form).serialize(), // Serialize the form data
                 success: function(response) {
                     // Display a success message or redirect the user

@@ -23,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         // Set the application locale to 'en'
+        Schema::defaultStringLength(191);
         App::setLocale('en');
 
     }

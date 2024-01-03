@@ -3,21 +3,13 @@
 namespace App\Http\Services;
 
 use App\Models\Customer;
+use App\Traits\Logger;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class CustomerService
 {
-    protected $perPage;
-
-    /**
-     * CustomerService constructor.
-     *
-     * Date: 29th Dec, 2023
-     * Developer: Kaushik
-     * Purpose: Initializes the CustomerService instance.
-     */
-
-
+    use Logger;
     /**
      * Get all customers.
      *
@@ -25,16 +17,33 @@ class CustomerService
      * Developer: Kaushik
      * Purpose: Retrieves all customers with specified fields and paginates the results.
      *
-     * @return \Illuminate\Pagination\LengthAwarePaginator
+     * @return \Illuminate\Support\Collection
      */
-    public function getAllCustomers()
+    public function getAllCustomers(): \Illuminate\Support\Collection
     {
         try {
             // Fetch all the customers
             return Customer::select(['id','customer_number','name','country','city','zip','contact_person_name']);
         } catch (\Exception $e) {
             // Log any exceptions
-            Log::error("Error fetching all customers: {$e->getMessage()}");
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - List Operation', request()->ip(), $e);
+            return collect(); // Return an empty collection on error
+        }
+    }
+
+    public function  getCustomerById($id)
+    {
+        try {
+            // Fetch all the customers
+            $customer = Customer::find($id);
+            if(!$customer) {
+                return false;
+            }
+            return $customer;
+
+        } catch (\Exception $e) {
+            // Log any exceptions
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Fetch Single', request()->ip(), $e);
             return collect(); // Return an empty collection on error
         }
     }
@@ -49,25 +58,60 @@ class CustomerService
      * @param \Illuminate\Http\Request $request
      * @return \App\Models\Customer|false
      */
-    public function create($request)
+    public function create(Request $request): Customer|bool
     {
         try {
             // Creating Customer
             return Customer::create([
-                'customer_number' => $request->input('customer_number'),
-                'name' => $request->input('name'),
-                'street_address' => $request->input('street_address'),
-                'zip' => $request->input('zip'),
-                'city' => $request->input('city'),
-                'country' => $request->input('country'),
-                'vat' => $request->input('vat'),
-                'contact_person_name' => $request->input('contact_person_name'),
-                'contact_person_email' => $request->input('contact_person_email'),
-                'contact_person_phone' => $request->input('contact_person_phone'),
+                'customer_number' => $request->customer_number,
+                'name' => $request->name,
+                'street_address' => $request->street_address,
+                'zip' => $request->zip,
+                'city' => $request->city,
+                'country' => $request->country,
+                'vat' => $request->vat,
+                'contact_person_name' => $request->contact_person_name,
+                'contact_person_email' => $request->contact_person_email,
+                'contact_person_phone' => $request->contact_person_phone,
             ]);
         } catch (\Exception $e) {
             // Log any exceptions
-            Log::error("Error creating customer: {$e->getMessage()}");
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Create Operation', request()->ip(), $e);
+            return false; // Return false on error
+        }
+    }
+
+    // Updating Customer
+    public function update($request, $customer){
+        try {
+            return $customer->update(
+                [
+                    'customer_number' => $request->customer_number,
+                    'name' => $request->name,
+                    'street_address' => $request->street_address,
+                    'zip' => $request->zip,
+                    'city' => $request->city,
+                    'country' => $request->country,
+                    'vat' => $request->vat,
+                    'contact_person_name' => $request->contact_person_name,
+                    'contact_person_email' => $request->contact_person_email,
+                    'contact_person_phone' => $request->contact_person_phone,
+                ]
+            );
+        } catch (\Exception $e) {
+            // Log any exceptions
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Update Operation', request()->ip(), $e);
+            return false; // Return false on error
+        }
+    }
+
+    // Deleting Customer
+    public function delete($customer){
+        try {
+            return $customer->delete();
+        } catch (\Exception $e) {
+            // Log any exceptions
+            $this->log($e->getMessage(), auth()->id ?? '', 'Customer - Delete Operation', request()->ip(), $e);
             return false; // Return false on error
         }
     }

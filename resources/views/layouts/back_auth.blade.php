@@ -24,6 +24,36 @@
     <span class="cyan"></span>
 </div>
 @yield('content')
-@include ('_back._inc._scripts')
+<script src="{{ asset('_back/bundles/libscripts.bundle.js') }}"></script>
+<script src="{{ asset('_back/bundles/vendorscripts.bundle.js') }}"></script>
+<script src="{{ asset('_back/bundles/mainscripts.bundle.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script>
+// jQuery validation
+$(document).ready(function () {
+    $('#loginForm').validate({
+        rules: {
+            email: {
+                required: true,
+                email: true
+            },
+            password: {
+                required: true,
+                minlength: 6  // Change the minimum length as needed
+            }
+        },
+        messages: {
+            email: {
+                required: 'Please enter your email',
+                email: 'Please enter a valid email address'
+            },
+            password: {
+                required: 'Please enter your password',
+                minlength: 'Password must be at least 6 characters long'
+            }
+        }
+    });
+});
+</script>
 </body>
 </html>

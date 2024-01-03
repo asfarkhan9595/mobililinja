@@ -90,42 +90,25 @@ class TrunkService
     }
 
     /**
-     * Get a trunk by ID.
-     *
-     * @param int $id
-     * @return \App\Models\Trunk|null
-     */
-
-    /**
      * Update a trunk.
      *
      * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param \App\Models\Trunk $trunk
      * @return bool
      */
     public function update($request, $trunk)
     {
         try {
-            return $trunk->update([
-         
-                'tname' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
-                'secret' => $request->input('secret'),
-                'authentication' => $request->input('authentication'),
-                'registration' => $request->input('registration'),
-                'sip_server' => $request->input('sip_server'),
-                'sip_secret_port' => $request->input('sip_secret_port'),
-                'context' => $request->input('context'),
-                'transport' => $request->input('transport'),
-            ]);
-
+            $trunk->fill($request->all())->save();
+            
+            return true; // Return true on successful update
         } catch (\Exception $e) {
             // Log any exceptions using Laravel's built-in Log facade
             Log::error("Trunk - Update Operation: {$e->getMessage()}");
             return false; // Return false on error
         }
+    
     }
-
     public function delete($trunk){
         try {
             return $trunk->delete();

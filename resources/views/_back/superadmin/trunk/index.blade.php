@@ -63,7 +63,7 @@
     <script>
         function fetchData(id) {
             $.ajax({
-                url: '{{ route('superadmin.trunk.edit', ['trunk' => 'trunk_id']) }}'.replace('trunk_id', id),
+                url: '{{ route('superadmin.trunks.edit', ['trunk' => 'trunk_id']) }}'.replace('trunk_id', id),
                 method: 'GET',
                 success: function(data) {
                     // Populate the modal input field with the fetched data
@@ -92,15 +92,15 @@
         $('#editModal').css('display', 'block');
     });
 
-        $('#saveTrunkBtn').on('click', function(e) {
+        $('#saveBtn').on('click', function(e) {
             e.preventDefault();
             const id = $('[name="id"]').val();
             if ($('#trunkEditForm').valid()) {
                 // Perform an AJAX POST request to update the data
                 $.ajax({
-                    url: '{{ route('superadmin.trunk.update', ['trunk' => 'trunk_id']) }}'.replace(
+                    url: '{{ route('superadmin.trunks.update', ['trunk' => 'trunk_id']) }}'.replace(
                         'trunk_id', id),
-                    type: "POST",
+                    type: "PUT",
                     data: {
                         _token: '{{ csrf_token() }}',
                         _method: "PUT",
@@ -132,12 +132,12 @@
                                 }
                             }
                         }
-                        console.log('Data updated successfully:', response);
+                        console.log('Dataaaa updated successfully:', response);
                         // Close the modal
                         $('#main-content .container-fluid').prepend(
                             '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert"> {{ __('Data updated successfully') }} <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>'
                         )
-                        $('#editTrunkModal').modal('hide');
+                        $('.bd-example-modal-lg').modal('hide');
                         window.LaravelDataTables["trunk-table"].ajax.reload();
                     },
                     error: function(xhr, status, error) {
@@ -151,7 +151,7 @@
         function deleteTrunk(id) {
     // Make an AJAX request to delete the trunk
     $.ajax({
-        url: "{{ route('superadmin.trunk.destroy', ['trunk' => '__id__']) }}".replace('__id__', id),
+        url: "{{ route('superadmin.trunks.destroy', ['trunk' => '__id__']) }}".replace('__id__', id),
         type: "DELETE",
         data: {
             _method: "DELETE",

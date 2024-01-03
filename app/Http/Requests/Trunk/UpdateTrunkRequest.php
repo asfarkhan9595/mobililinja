@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests\Trunk;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -32,7 +31,6 @@ class UpdateTrunkRequest extends FormRequest
             'sip_secret_port' => 'required|integer',
             'context' => 'required|string|max:255',
             'transport' => 'required|string|max:255',
-           
         ];
     }
 }

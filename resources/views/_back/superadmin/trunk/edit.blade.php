@@ -10,7 +10,7 @@
                 </button>
             </div>
 
-            <form action="" method="post">
+            <form action="" method="post" id="trunkEditForm">
                 @csrf
                 <div class="modal-body">
                     <div class="row clearfix">
@@ -26,6 +26,7 @@
                                             <div class="body demo-card">
                                                 <div class="row clearfix">
                                                     <div class="col-lg-4 col-md-12">
+                                                        <input type="hidden" class="form-control" name="id">
                                                         <label>Trunk name</label>
                                                         <div class="form-group">
                                                             <input type="text" class="form-control" name="tname"
@@ -90,8 +91,9 @@
                                 <div class="col-lg-12 col-md-12">
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default mb-2" data-dismiss="modal"
-                                            aria-label="Close">Cancel</button>
-                                            <button type="submit" class="btn btn-outline-info mb-2">Save</button>
+                                                aria-label="Close">Cancel</button>
+                                        <input id="saveBtn" type="submit" class="btn btn-outline-info mb-2"
+                                                value="Update Trunk"></button>
                                     </div>
                                 </div>
                             </div>

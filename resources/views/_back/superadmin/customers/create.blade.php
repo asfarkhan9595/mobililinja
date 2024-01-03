@@ -1,4 +1,3 @@
-<!-- larg modal -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -8,7 +7,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form action="{{ route('superadmin.customer.store') }}" method="post">
+            <form action="#" id="customerForm" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="row clearfix">
@@ -286,3 +285,88 @@
         </div>
     </div>
 </div>
+@push('page_script')
+<script>
+$(document).ready(function () {
+    $('#customerForm').validate({
+        rules: {
+            name: { required: true },
+            street_address: { required: true },
+            zip: {
+                required: true,
+                minlength: 5,
+                maxlength: 9
+            },
+            city: { required: true, minlength: 2 },
+            country: { required: true },
+            vat: { required: true },
+            contact_person_name: { required: true },
+            contact_person_email: {
+                required: true,
+                email: true
+            },
+            contact_person_phone: { required: true }
+        },
+        messages: {
+            name: "Please enter the customer name",
+            street_address: "Please enter the street address",
+            zip: {
+                required: "Please enter the ZIP code",
+                minlength: "ZIP code must be at least 5 characters",
+                maxlength: "ZIP code must not exceed 9 characters"
+            },
+            city: "Please enter the city",
+            country: "Please select the country",
+            vat: "Please enter the VAT",
+            contact_person_name: "Please enter the contact person's name",
+            contact_person_email: {
+                required: "Please enter the contact person's email",
+                email: "Please enter a valid email address"
+            },
+            contact_person_phone: "Please enter the contact person's phone number"
+        },
+        submitHandler: function(form) {
+            // Use AJAX to submit the form data
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('superadmin.customers.store')}}",
+                data: $(form).serialize(), // Serialize the form data
+                success: function(response) {
+                    // Display a success message or redirect the user
+                    if (response.errors) {
+                    // Display the overall error message
+                        showAutoDismissAlert('error',response.message,5000);
+                        // Iterate through each error and display them
+                        for (var field in response.errors) {
+                            if (response.errors.hasOwnProperty(field)) {
+                                var errorMessages = response.errors[field];
+                                // Display individual error messages
+                                errorMessages.forEach(function (errorMessage) {
+                                    // $('#main-content .container-fluid').prepend('<li>' + errorMessage + '</li>');
+                                    showAutoDismissAlert('error',errorMessage,5000);
+                                });
+                            }
+                        }
+                    }
+                    else {
+                        var alertHtml = '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' + 'Data submitted successfully' +
+                                        '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></div>';
+                        $('#main-content .container-fluid').prepend(alertHtml);
+                        // Set a timeout to remove the alert after the specified duration
+                        setTimeout(function() {
+                            $('.alert-dismissible').alert('close');
+                        }, 5000);
+                    }
+                    window.LaravelDataTables["customer-table"].ajax.reload();
+                    $('.bd-example-modal-lg').modal('hide');
+                },
+                error: function(error) {
+                    // Display an error message
+                    showAutoDismissAlert('error',"Error submitting data", 5000);
+                }
+            });
+        }
+    });
+});
+</script>
+@endpush

@@ -49,13 +49,13 @@ class TrunkController extends Controller
             $createTrunk = $this->trunkService->create($request);
     
             if ($createTrunk) {
-                return redirect()->route('superadmin.trunk.index')->with(['message' => __('trunk-created')]);
+                return redirect()->route('superadmin.trunks.index')->with(['message' => __('trunk-created')]);
             }
     
-            return redirect()->route('superadmin.trunk.index')->with(['error' => __('messages.trunk-creation-failed')]);
+            return redirect()->route('superadmin.trunks.index')->with(['error' => __('messages.trunk-creation-failed')]);
         } catch (\Exception $e) {
             $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - List Operation', request()->ip(), $e);
-            return redirect()->route('superadmin.trunk.index')->with(['error' => __('messages.trunk-creation-error')]);
+            return redirect()->route('superadmin.trunks.index')->with(['error' => __('messages.trunk-creation-error')]);
         }
     }
     /**
@@ -70,46 +70,49 @@ class TrunkController extends Controller
      * Show the form for editing the specified resource.
      */
 
-    public function edit(string $id)
-    {
-        try {
-            $trunk = $this->trunkService->getTrunkById($id);
-            if(!$trunk) {
-                return response()->json([]);
-            }
-            return response()->json($trunk);
-        }catch (Exception $e){
-            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Edit Operation', request()->ip(), $e);
-            return false;
-        }
-    }
+     public function edit(string $id)
+     {
+         try {
+             $trunk = $this->trunkService->getTrunkById($id);
+     
+             if (!$trunk) {
+                 return response()->json(['error' => 'Trunk not found'], 404);
+             }
+     
+             return response()->json($trunk, 200);
+         } catch (Exception $e) {
+             $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Edit Operation', request()->ip(), $e);
+             return response()->json(['error' => 'Internal Server Error'], 500);
+         }
+     }
+     
+     
     /**
      * Update the specified resource in storage.
      */
     public function update(UpdateTrunkRequest $request, string $id)
-    {
-        try {
-            return DB::transaction(function () use ($request, $id) {
-                $trunk = $this->trunkService->getTrunkById($id);
-                
-                if (!$trunk) {
-                    return false;
-                }
+{
+    
+    try {
+        $trunk = $this->trunkService->getTrunkById($id);
 
-                $updateTrunk = $this->trunkService->update($request, $trunk);
-
-                if (!$updateTrunk) {
-                    return false;
-                }
-
-                return redirect()->route('superadmin.trunk.index')->with(['message' => trans('messages.trunk-updated')]);
-            });
-        } catch (Exception $e) {
-            $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Update Operation', request()->ip(), $e);
-            return redirect()->route('superadmin.trunk.index')->with(['error' => trans('messages.trunk-update-error')]);
+        if (!$trunk) {
+            return response()->json(['error' => 'Trunk not found'], 404);
         }
-    }
 
+        $updateTrunk = $this->trunkService->update($request, $trunk);
+
+        if (!$updateTrunk) {
+            return response()->json(['error' => 'Trunk update failed'], 500);
+        }
+
+        // If you're in an API context, you might return a success JSON response here
+        return response()->json(['message' => trans('messages.trunk-updated')], 200);
+    } catch (Exception $e) {
+        $this->log($e->getMessage(), auth()->id ?? '', 'Trunk - Update Operation', request()->ip(), $e);
+        return response()->json(['error' => trans('messages.trunk-update-error')], 500);
+    }
+}
     protected function log($message, $userId, $operation, $ip, Exception $exception = null)
     {
         // Your logging logic here
