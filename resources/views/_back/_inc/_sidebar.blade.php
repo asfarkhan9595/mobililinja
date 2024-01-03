@@ -42,8 +42,9 @@
                 @endif
                 <li><a href="#"><i class="icon-docs"></i><span>Invoices</span></a></li>
                 <li><a href="#"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>
-                <li><a href="#"><i class="icon-share"></i><span>Trunks</span></a></li>
-                <li><a href="#"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
+                @if(auth()->user()->hasPermission(['create-trunk','edit-trunk','delete-trunk','list-trunk']))
+                <li><a href="{{ route('superadmin.trunks.index') }}"><i class="icon-share"></i><span>Trunks</span></a></li>
+            @endif                <li><a href="#"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
                 <li><a href="#"><i class="icon-ban"></i><span>Firewall</span></a></li>
             </ul>
         </nav>
