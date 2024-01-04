@@ -20,4 +20,3 @@
 <script src="{{ asset('_back/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script><!-- Bootstrap Tags Input Plugin Js -->
 <script src="{{ asset('_back/vendor/nouislider/nouislider.js')}}"></script><!-- noUISlider Plugin Js -->
 <script src="{{ asset('_back/js/pages/forms/advanced-form-elements.js') }}"></script>
-
