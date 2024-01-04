@@ -1,26 +1,30 @@
 <div id="left-sidebar" class="sidebar">
     <div class="navbar-brand">
-        <a href="#"><img src="{{ asset('_back/images/logo_icon.png') }}" class="img-fluid logo"><span><img src="{{ asset('_back/images/logo_txt.png')}}"></span></a>
-        <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i class="lnr lnr-menu icon-close"></i></button>
+        <a href="#"><img src="{{ asset('_back/images/logo_icon.png') }}" class="img-fluid logo"><span><img
+                    src="{{ asset('_back/images/logo_txt.png') }}"></span></a>
+        <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i
+                class="lnr lnr-menu icon-close"></i></button>
     </div>
-    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: calc(100vh - 65px);"><div class="sidebar-scroll" style="overflow: hidden; width: auto; height: calc(100vh - 65px);">
-        <div class="user-account">
-            <div class="user_div">
-                <img src="{{asset('_back/images/user.png')}}" class="user-photo" alt="User Profile Picture">
+    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: calc(100vh - 65px);">
+        <div class="sidebar-scroll" style="overflow: hidden; width: auto; height: calc(100vh - 65px);">
+            <div class="user-account">
+                <div class="user_div">
+                    <img src="{{ asset('_back/images/user.png') }}" class="user-photo" alt="User Profile Picture">
+                </div>
+                <div class="dropdown">
+                    <span>Welcome,</span>
+                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Louis
+                            Pierce</strong></a>
+                    <ul class="dropdown-menu dropdown-menu-right account vivify flipInY">
+                        <li><a href="profile.html"><i class="icon-settings"></i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="page-login.html"><i class="icon-power"></i>Logout</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="dropdown">
-                <span>Welcome,</span>
-                <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>Louis Pierce</strong></a>
-                <ul class="dropdown-menu dropdown-menu-right account vivify flipInY">
-                    <li><a href="profile.html"><i class="icon-settings"></i>Settings</a></li>
-                    <li class="divider"></li>
-                    <li><a href="page-login.html"><i class="icon-power"></i>Logout</a></li>
-                </ul>
-            </div>
-        </div>
-        <nav id="left-sidebar-nav" class="sidebar-nav">
-            <ul id="main-menu" class="metismenu">
-                <!-- <li><a href="webphone.html"><i class="icon-call-end"></i><span>Webphone</span></a></li>
+            <nav id="left-sidebar-nav" class="sidebar-nav">
+                <ul id="main-menu" class="metismenu">
+                    <!-- <li><a href="webphone.html"><i class="icon-call-end"></i><span>Webphone</span></a></li>
                 <li class="active open"><a href="dashboard.html"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>
                 <li><a href="phonebook.html"><i class="icon-book-open"></i><span>Phonebook</span></a></li>
                 <li><a href="calendar.html"><i class="icon-calendar"></i><span>Calendar</span></a></li>
@@ -37,16 +41,32 @@
                 <li><a href="reports.html"><i class="icon-pie-chart"></i><span>Reports</span></a></li>
                 -->
 
-                @if(auth()->user()->hasRole(['superadmin','admin']))
-                <li class="header">SuperAdmin</li>
-                    <li><a href="{{ route('superadmin.customers.index') }}"><i class="icon-globe"></i><span>Customers</span></a></li>
-                    <li><a href="#"><i class="icon-docs"></i><span>Invoices</span></a></li>
-                    <li><a href="{{ route('superadmin.pstn.index') }}"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>
-                    <li><a href="#"><i class="icon-share"></i><span>Trunks</span></a></li>
-                    <li><a href="#"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
-                    <li><a href="#"><i class="icon-ban"></i><span>Firewall</span></a></li>
-                @endif
-            </ul>
-        </nav>
-    </div><div class="slimScrollBar" style="background: rgb(28, 34, 44); width: 2px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 3px; z-index: 99; right: 1px; height: 94.2156px;"></div><div class="slimScrollRail" style="width: 2px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>
+                    @if (auth()->user()->hasRole(['superadmin', 'admin']))
+                        <li class="header">SuperAdmin</li>
+                        <li><a href="{{ route('superadmin.customers.index') }}"><i
+                                    class="icon-globe"></i><span>Customers</span></a></li>
+                        <li><a href="#"><i class="icon-docs"></i><span>Invoices</span></a></li>
+                        <li><a href="{{ route('superadmin.pstn.index') }}"><i
+                                    class="icon-compass"></i><span>PSTN-numbers</span></a></li>
+                        @if (auth()->user()->hasPermission(['create-trunk', 'edit-trunk', 'delete-trunk', 'list-trunk']))
+                            <li><a href="{{ route('superadmin.trunks.index') }}"><i
+                                        class="icon-share"></i><span>Trunks</span></a></li>
+                        @endif
+                        @if (auth()->user()->hasPermission(['create-outbound', 'edit-outbound', 'delete-outbound', 'list-outbound']))
+                            <li><a href="{{ route('superadmin.outbounds.index') }}"><i
+                                        class="icon-call-out"></i><span>Outbound routes</span></a></li>
+                        @endif
+
+                        <li><a href="#"><i class="icon-ban"></i><span>Firewall</span></a></li>
+                    @endif
+                </ul>
+            </nav>
+        </div>
+        <div class="slimScrollBar"
+            style="background: rgb(28, 34, 44); width: 2px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 3px; z-index: 99; right: 1px; height: 94.2156px;">
+        </div>
+        <div class="slimScrollRail"
+            style="width: 2px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;">
+        </div>
+    </div>
 </div>
