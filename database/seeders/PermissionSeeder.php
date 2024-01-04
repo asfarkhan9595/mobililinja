@@ -53,31 +53,51 @@ class PermissionSeeder extends Seeder
                 'name' => 'list-pstn',
                 'display_name' => 'List PSTN', // optional
                 'description' => 'List the PSTN', // optional
-            ]
-        ];
+            ],
 
-        // Trunk Permissions
-        [
-            'name' => 'create-trunk',
-            'display_name' => 'Create Trunk',
-            'description' => 'Create new Trunk',
-        ],
-        [
-            'name' => 'edit-trunk',
-            'display_name' => 'Edit Trunk',
-            'description' => 'Edit existing Trunk',
-        ],
-        [
-            'name' => 'delete-trunk',
-            'display_name' => 'Delete Trunk',
-            'description' => 'Delete Trunk',
-        ],
-        [
-            'name' => 'list-trunk',
-            'display_name' => 'List Trunk',
-            'description' => 'List the Trunks',
-        ],
-    ];
+            // Trunk Permissions
+            [
+                'name' => 'create-trunk',
+                'display_name' => 'Create Trunk',
+                'description' => 'Create new Trunk',
+            ],
+            [
+                'name' => 'edit-trunk',
+                'display_name' => 'Edit Trunk',
+                'description' => 'Edit existing Trunk',
+            ],
+            [
+                'name' => 'delete-trunk',
+                'display_name' => 'Delete Trunk',
+                'description' => 'Delete Trunk',
+            ],
+            [
+                'name' => 'list-trunk',
+                'display_name' => 'List Trunk',
+                'description' => 'List the Trunks',
+            ],
+            // Invoice Permissions
+            [
+                'name' => 'create-invoice',
+                'display_name' => 'Create Invoice',
+                'description' => 'Create new Invoice',
+            ],
+            [
+                'name' => 'edit-invoice',
+                'display_name' => 'Edit Invoice',
+                'description' => 'Edit existing Invoice',
+            ],
+            [
+                'name' => 'delete-invoice',
+                'display_name' => 'Delete Invoice',
+                'description' => 'Delete Invoice',
+            ],
+            [
+                'name' => 'list-invoice',
+                'display_name' => 'List Invoices',
+                'description' => 'List the Invoices',
+            ],
+        ];
 
         foreach ($permissions as $permission) {
             Permission::updateOrCreate(['name' => $permission['name']], $permission);
