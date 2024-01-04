@@ -1,0 +1,151 @@
+[33mcommit bf280da866120acb950fb5ac6677a250406b55db[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32moutbound-module-04-jan-2024[m[33m, [m[1;31morigin/outbound-module-04-jan-2024[m[33m)[m
+Author: vinodkprecisio <vinodk@precisio.tech>
+Date:   Thu Jan 4 19:42:23 2024 +0530
+
+    Outbound-module-crud-operation-done
+
+[33mcommit 721f7b0682ec5dae2cdc2d3ec3a4350363245ea0[m[33m ([m[1;31morigin/development[m[33m, [m[1;32moutbound-module[m[33m)[m
+Merge: 446d570 efbab2b
+Author: Kaushik Thakkar <kaushik.moment@outlook.com>
+Date:   Thu Jan 4 11:38:18 2024 +0530
+
+    Merge pull request #3 from EsaLahtinen/pstn-module-02-jan-24
+    
+    PSTN Crud
+
+[33mcommit efbab2b4f2f1b7576dbc77004842acbe616f14ea[m
+Merge: 0d6a814 446d570
+Author: Kaushik Thakkar <kaushik.moment@outlook.com>
+Date:   Thu Jan 4 11:31:23 2024 +0530
+
+    Merge branch 'development' into pstn-module-02-jan-24
+
+[33mcommit 446d570bff8ba046d55d0f2430fc929d12ed898a[m
+Merge: 89a18e6 e05069d
+Author: Vinod Kakad <151393531+vinodkprecisio@users.noreply.github.com>
+Date:   Wed Jan 3 18:40:46 2024 +0530
+
+    Merge pull request #4 from EsaLahtinen/trunk_02-jan-2024
+    
+    Trunk 02 jan 2024
+
+[33mcommit e05069dbbb9de4165b3a67c1146e9b363d4ebfb5[m[33m ([m[1;31morigin/trunk_02-jan-2024[m[33m, [m[1;32mtrunk_02-jan-2024[m[33m)[m
+Author: vinodkprecisio <vinodk@precisio.tech>
+Date:   Wed Jan 3 18:37:10 2024 +0530
+
+    trunk-custom form validation in update and create
+
+[33mcommit 0d6a814bd4e3fcc0c73400c925af453f30016968[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Wed Jan 3 16:33:51 2024 +0530
+
+    Code optimized
+
+[33mcommit 84ddb3602257045ed878b2a763a97e9af1953904[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Wed Jan 3 15:08:29 2024 +0530
+
+    PSTN Crud
+
+[33mcommit 9f79bf57794107aa98f6df4ad59aaa25cee72f35[m
+Author: vinodkprecisio <vinodk@precisio.tech>
+Date:   Wed Jan 3 14:36:28 2024 +0530
+
+    trunk-crud operation msg timeout
+
+[33mcommit 8539d1a6ae734dbc7ba4c1d7fa3d40a5815d62cc[m
+Merge: e27dc18 89a18e6
+Author: vinodkprecisio <vinodk@precisio.tech>
+Date:   Wed Jan 3 12:30:52 2024 +0530
+
+    trunk-crud operation
+
+[33mcommit 89a18e683916986c92986428c9fec461e7027c26[m
+Merge: 7836b58 80ca87c
+Author: Vinod Kakad <151393531+vinodkprecisio@users.noreply.github.com>
+Date:   Wed Jan 3 11:46:41 2024 +0530
+
+    Merge pull request #2 from EsaLahtinen/customer-module
+    
+    Customer Edit, Update & Delete. Country Seeder
+
+[33mcommit 80ca87cc379d649932f76d4470558ccd2d8bc1bf[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Wed Jan 3 11:14:34 2024 +0530
+
+    Added json response format for all methods.
+
+[33mcommit e27dc183c86d5abb7b4efc14d9a0be34d4e6053d[m
+Author: vinodkprecisio <vinodk@precisio.tech>
+Date:   Tue Jan 2 19:55:03 2024 +0530
+
+    Trunk Crud done
+
+[33mcommit a5a465be9970e87d221ce61eec045b6ade5da1a5[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Tue Jan 2 17:26:27 2024 +0530
+
+    Added Ajax Customer Creation. Add Customer Form clear after edit any record
+
+[33mcommit 30813dfa0f4687721b204d47a36190b6ad4e183c[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Tue Jan 2 16:05:17 2024 +0530
+
+    Added Logger, Updated Route. Fixed codes
+
+[33mcommit 1d6fe8a18ae08a847b8876e7abdbbfc775e2481f[m
+Author: Vinod Kakad <vinodk@precisio.tech>
+Date:   Tue Jan 2 13:08:09 2024 +0530
+
+    Added code fixes for migration
+
+[33mcommit 0dd9aae244a6ee18f87584575f9f6d31b7666e16[m[33m ([m[1;31morigin/customer-module[m[33m, [m[1;32mcustomer-module[m[33m)[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Mon Jan 1 19:51:31 2024 +0530
+
+    Customer Edit, Update & Delete. Country Seeder
+
+[33mcommit 7836b58414559f19889712b1652409bfb7f07274[m[33m ([m[1;32mdevelopment[m[33m)[m
+Merge: 36ee455 325fb15
+Author: Vinod Kakad <151393531+vinodkprecisio@users.noreply.github.com>
+Date:   Mon Jan 1 15:13:54 2024 +0530
+
+    Merge pull request #1 from EsaLahtinen/customer-module
+    
+    Customer module
+
+[33mcommit 325fb153dcce08939562dd795150593cf7a6fb8c[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Mon Jan 1 15:11:17 2024 +0530
+
+    Updated AssignPermission To Role Seeder
+
+[33mcommit f3be51b21588d965e2f7c97c9ef7daf9fabdb1a3[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Mon Jan 1 14:38:28 2024 +0530
+
+    Added Customer List,Edit & Delete
+
+[33mcommit 96b884a4109827944e5cf74366aa45bbe571bd2c[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Fri Dec 29 19:06:27 2023 +0530
+
+    Added Permission & Role Seeder. Lang Support.
+
+[33mcommit 392d4018534788a9c0005c1594bdd7edabf97f0e[m
+Author: Kaushik Thakkar <Kaushik.moment@outlook.com>
+Date:   Fri Dec 29 19:00:04 2023 +0530
+
+    Added Permission & Role Seeder. Lang Support.
+
+[33mcommit 36ee455bc41b89f37bcfa778e06346c45e853329[m
+Author: kaushik.thakkar <kaushik.thakkar@solwininfotech.com>
+Date:   Fri Dec 29 16:50:08 2023 +0530
+
+    Added Service CRUD option
+
+[33mcommit 3802ad398a45ff82b1d5471f185cfdb2dff942a7[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Author: kaushik.thakkar <kaushik.thakkar@solwininfotech.com>
+Date:   Fri Dec 29 11:52:39 2023 +0530
+
+    Init
