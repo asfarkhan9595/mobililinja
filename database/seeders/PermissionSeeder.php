@@ -98,6 +98,27 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'List Invoices',
                 'description' => 'List the Invoices',
             ],
+            // Trunk Permissions
+            [
+                'name' => 'create-trunk',
+                'display_name' => 'Create Trunk',
+                'description' => 'Create new Trunk',
+            ],
+            [
+                'name' => 'edit-trunk',
+                'display_name' => 'Edit Trunk',
+                'description' => 'Edit existing Trunk',
+            ],
+            [
+                'name' => 'delete-trunk',
+                'display_name' => 'Delete Trunk',
+                'description' => 'Delete Trunk',
+            ],
+            [
+                'name' => 'list-trunk',
+                'display_name' => 'List Trunk',
+                'description' => 'List the Trunks',
+            ],
         ];
 
         foreach ($permissions as $permission) {
