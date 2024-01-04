@@ -34,6 +34,7 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'List Customer',
                 'description' => 'List the Customers/Companies',
             ],
+            // PSTN Permission
             [
                 'name' => 'create-pstn',
                 'display_name' => 'Create PSTN', // optional
