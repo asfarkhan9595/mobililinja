@@ -139,7 +139,7 @@
                                         }, 5000);
                                     }
                                 }
-                                window.LaravelDataTables["customer-table"].ajax.reload();
+                                window.LaravelDataTables["firewallnetwork-table"].ajax.reload();
                                 $('.bd-example-modal-lg').modal('hide');
                             },
                             error: function (error) {
@@ -151,6 +151,8 @@
                                     $('.alert-dismissible').alert('close');
                                 }, 5000);
                             }
+                        }).done(function(){
+                            $('#addFirewallNetwork')[0].reset();
                         });
                     } else {
                         var alertHtml = '<div class="alert alert-danger mt-4 alert-dismissible fade show" role="alert">' + 'Please fill the required field' +
@@ -162,9 +164,6 @@
                         }, 5000);
                     }
                 }
-            });
-
-            $("#submitBtn").on("click", function () {
 
             });
         });

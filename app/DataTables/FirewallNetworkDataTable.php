@@ -39,7 +39,7 @@ class FirewallNetworkDataTable extends DataTable
      */
     public function query(FirewallNetwork $model): QueryBuilder
     {
-        $firewallService = new FirewallService;
+        $firewallService = new FirewallService();
         return $firewallService->getAllNetworks()->with('customer');
     }
 
