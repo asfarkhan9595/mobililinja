@@ -47,7 +47,7 @@ class CustomerController extends Controller
      */
     public function store(CreateCustomerRequest $request): \Illuminate\Http\JsonResponse
     {
-         try {
+        try {
              $createCustomer = DB::transaction(function () use ($request) {
                 $createCustomer = $this->customerService->create($request);
                 return [

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Services\{{name}};
+namespace App\Http\Services;
 
 class {{name}}Service
-{ 
+{
 
 }

@@ -15,6 +15,7 @@ class PermissionSeeder extends Seeder
         $permissions = [
             // Customer Permissions
             [
+<<<<<<< Updated upstream
                 'name' => 'create-customer',
                 'display_name' => 'Create Customer/Company',
                 'description' => 'Create new Customer/Company',
@@ -53,6 +54,26 @@ class PermissionSeeder extends Seeder
                 'name' => 'list-pstn',
                 'display_name' => 'List PSTN', // optional
                 'description' => 'List the PSTN', // optional
+=======
+                'name' => 'create-firewall',
+                'display_name' => 'Create Firewall', // optional
+                'description' => 'create new Firewall', // optional
+            ],
+            [
+                'name' => 'edit-firewall',
+                'display_name' => 'Edit Firewall', // optional
+                'description' => 'edit existing Firewall', // optional
+            ],
+            [
+                'name' => 'delete-firewall',
+                'display_name' => 'Delete Firewall', // optional
+                'description' => 'delete new Firewall', // optional
+            ],
+            [
+                'name' => 'list-firewall',
+                'display_name' => 'List Firewall', // optional
+                'description' => 'List the Firewall', // optional
+>>>>>>> Stashed changes
             ]
         ];
 
