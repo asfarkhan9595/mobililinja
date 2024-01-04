@@ -52,7 +52,7 @@ class FirewallNetworkDataTable extends DataTable
                     ->setTableId('firewallnetwork-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    //->dom('Bfrtip')
+                    ->dom('Bfrtip')
                     ->orderBy(1)
                     ->selectStyleSingle()
                     ->buttons([
@@ -73,7 +73,7 @@ class FirewallNetworkDataTable extends DataTable
             Column::make('description')->title('Description'),
             Column::make('accepted_date')->title('Date'),
             Column::computed('action')
-                  ->exportable(false)
+                  ->exportable(true)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
