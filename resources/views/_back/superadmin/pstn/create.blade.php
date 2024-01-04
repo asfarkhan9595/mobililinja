@@ -111,6 +111,8 @@ $(document).ready(function() {
                     // Display an error message
                     showAutoDismissAlert('error',"Error submitting data", 5000);
                 }
+            }).done(function(){
+                $('#pstnForm')[0].reset();
             });
         }
     });
