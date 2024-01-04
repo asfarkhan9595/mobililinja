@@ -134,7 +134,8 @@
                         required: true
                     },
                     sip_secret_port: {
-                        required: true
+                        required: true,
+                        integer: true
                     },
                     context: {
                         required: true
@@ -150,7 +151,10 @@
                     authentication: "Please enter the authentication",
                     registration: "Please enter the registration",
                     sip_server: "Please enter the SIP server",
-                    sip_secret_port: "Please enter the SIP secret port",
+                    sip_secret_port: {
+                        required: 'The field sip secret port is required.',
+                        number: 'Please enter a valid numeric value for sip secret port.',
+                    },
                     context: "Please enter the context",
                     transport: "Please enter the transport",
                 },
@@ -177,6 +181,8 @@
                                     }
                                 }
                             } else {
+
+                                $(form)[0].reset();
                                 var alertHtml =
                                     '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' +
                                     'Data submitted successfully' +
