@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Permission;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class PermissionSeeder extends Seeder
@@ -14,25 +13,26 @@ class PermissionSeeder extends Seeder
     public function run(): void
     {
         $permissions = [
+            // Customer Permissions
             [
                 'name' => 'create-customer',
-                'display_name' => 'Create Customer/Company', // optional
-                'description' => 'create new Customer/Company', // optional
+                'display_name' => 'Create Customer/Company',
+                'description' => 'Create new Customer/Company',
             ],
             [
                 'name' => 'edit-customer',
-                'display_name' => 'Edit Customer', // optional
-                'description' => 'edit existing Customer/Company', // optional
+                'display_name' => 'Edit Customer',
+                'description' => 'Edit existing Customer/Company',
             ],
             [
                 'name' => 'delete-customer',
-                'display_name' => 'Delete Customer/Company', // optional
-                'description' => 'delete new Customer/Company', // optional
+                'display_name' => 'Delete Customer/Company',
+                'description' => 'Delete Customer/Company',
             ],
             [
                 'name' => 'list-customer',
-                'display_name' => 'List Customer', // optional
-                'description' => 'List the Customers/Companies', // optional
+                'display_name' => 'List Customer',
+                'description' => 'List the Customers/Companies',
             ],
             [
                 'name' => 'create-pstn',
@@ -56,8 +56,31 @@ class PermissionSeeder extends Seeder
             ]
         ];
 
+        // Trunk Permissions
+        [
+            'name' => 'create-trunk',
+            'display_name' => 'Create Trunk',
+            'description' => 'Create new Trunk',
+        ],
+        [
+            'name' => 'edit-trunk',
+            'display_name' => 'Edit Trunk',
+            'description' => 'Edit existing Trunk',
+        ],
+        [
+            'name' => 'delete-trunk',
+            'display_name' => 'Delete Trunk',
+            'description' => 'Delete Trunk',
+        ],
+        [
+            'name' => 'list-trunk',
+            'display_name' => 'List Trunk',
+            'description' => 'List the Trunks',
+        ],
+    ];
+
         foreach ($permissions as $permission) {
-            Permission::updateOrCreate(['name' => $permission['name']],$permission);
+            Permission::updateOrCreate(['name' => $permission['name']], $permission);
         }
     }
 }
