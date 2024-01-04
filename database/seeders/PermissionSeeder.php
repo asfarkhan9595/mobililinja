@@ -15,7 +15,6 @@ class PermissionSeeder extends Seeder
         $permissions = [
             // Customer Permissions
             [
-<<<<<<< Updated upstream
                 'name' => 'create-customer',
                 'display_name' => 'Create Customer/Company',
                 'description' => 'Create new Customer/Company',
@@ -37,68 +36,64 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'name' => 'create-pstn',
-                'display_name' => 'Create PSTN', // optional
-                'description' => 'create new PSTN', // optional
+                'display_name' => 'Create PSTN',  // optional
+                'description' => 'create new PSTN',  // optional
             ],
             [
                 'name' => 'edit-pstn',
-                'display_name' => 'Edit PSTN', // optional
-                'description' => 'edit existing PSTN', // optional
+                'display_name' => 'Edit PSTN',  // optional
+                'description' => 'edit existing PSTN',  // optional
             ],
             [
                 'name' => 'delete-pstn',
-                'display_name' => 'Delete PSTN', // optional
-                'description' => 'delete new PSTN', // optional
+                'display_name' => 'Delete PSTN',  // optional
+                'description' => 'delete new PSTN',  // optional
             ],
             [
                 'name' => 'list-pstn',
-                'display_name' => 'List PSTN', // optional
-                'description' => 'List the PSTN', // optional
-=======
+                'display_name' => 'List PSTN',  // optional
+                'description' => 'List the PSTN',  // optional
                 'name' => 'create-firewall',
-                'display_name' => 'Create Firewall', // optional
-                'description' => 'create new Firewall', // optional
+                'display_name' => 'Create Firewall',  // optional
+                'description' => 'create new Firewall',  // optional
             ],
             [
                 'name' => 'edit-firewall',
-                'display_name' => 'Edit Firewall', // optional
-                'description' => 'edit existing Firewall', // optional
+                'display_name' => 'Edit Firewall',  // optional
+                'description' => 'edit existing Firewall',  // optional
             ],
             [
                 'name' => 'delete-firewall',
-                'display_name' => 'Delete Firewall', // optional
-                'description' => 'delete new Firewall', // optional
+                'display_name' => 'Delete Firewall',  // optional
+                'description' => 'delete new Firewall',  // optional
             ],
             [
                 'name' => 'list-firewall',
-                'display_name' => 'List Firewall', // optional
-                'description' => 'List the Firewall', // optional
->>>>>>> Stashed changes
-            ]
+                'display_name' => 'List Firewall',  // optional
+                'description' => 'List the Firewall',  // optional
+            ],
+            // Trunk Permissions
+            [
+                'name' => 'create-trunk',
+                'display_name' => 'Create Trunk',
+                'description' => 'Create new Trunk',
+            ],
+            [
+                'name' => 'edit-trunk',
+                'display_name' => 'Edit Trunk',
+                'description' => 'Edit existing Trunk',
+            ],
+            [
+                'name' => 'delete-trunk',
+                'display_name' => 'Delete Trunk',
+                'description' => 'Delete Trunk',
+            ],
+            [
+                'name' => 'list-trunk',
+                'display_name' => 'List Trunk',
+                'description' => 'List the Trunks',
+            ],
         ];
-
-        // Trunk Permissions
-        [
-            'name' => 'create-trunk',
-            'display_name' => 'Create Trunk',
-            'description' => 'Create new Trunk',
-        ],
-        [
-            'name' => 'edit-trunk',
-            'display_name' => 'Edit Trunk',
-            'description' => 'Edit existing Trunk',
-        ],
-        [
-            'name' => 'delete-trunk',
-            'display_name' => 'Delete Trunk',
-            'description' => 'Delete Trunk',
-        ],
-        [
-            'name' => 'list-trunk',
-            'display_name' => 'List Trunk',
-            'description' => 'List the Trunks',
-        ],
-    ];
 
         foreach ($permissions as $permission) {
             Permission::updateOrCreate(['name' => $permission['name']], $permission);

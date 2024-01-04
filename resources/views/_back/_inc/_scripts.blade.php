@@ -19,8 +19,4 @@
 <script src="{{ asset('_back/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('_back/vendor/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script><!-- Bootstrap Tags Input Plugin Js -->
 <script src="{{ asset('_back/vendor/nouislider/nouislider.js')}}"></script><!-- noUISlider Plugin Js -->
-<<<<<<< Updated upstream
 <script src="{{ asset('_back/js/pages/forms/advanced-form-elements.js') }}"></script>
-=======
-<script src="{{ asset('_back/js/pages/forms/advanced-form-elements.js') }}"></script>
->>>>>>> Stashed changes
