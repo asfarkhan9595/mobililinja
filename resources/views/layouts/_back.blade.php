@@ -91,7 +91,7 @@
             <div class="container-fluid">
                 <div class="navbar-left">
                     <div class="navbar-btn">
-                        <a href="#"><img src="assets/images/logo_small.png" alt="Logo" class="img-fluid logo"></a>
+                        <a href="#"><img src="{{asset('_back/images/logo_small.png')}}" alt="Logo" class="img-fluid logo"></a>
                         <button type="button" class="btn-toggle-offcanvas"><i
                                 class="lnr lnr-menu fa fa-bars"></i></button>
                     </div>
@@ -135,8 +135,8 @@
                         <div class="mega-card">
                             <h6 class="title">Video</h6>
                             <video id="my-video" class="video-js" controls="" preload="auto" width="1920" height="1080"
-                                poster="assets/video/admin.png" data-setup="{}">
-                                <source src="assets/video/promo.mp4" type="video/mp4">
+                                poster="{{asset('_back/video/admin.png')}}" data-setup="{}">
+                                <source src="{{asset('_back/video/promo.mp4')}}" type="video/mp4">
                                 <p class="vjs-no-js">
                                     To view this video please enable JavaScript, and consider upgrading to a web browser
                                     that

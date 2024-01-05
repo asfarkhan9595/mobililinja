@@ -52,5 +52,17 @@
     "validation.sip_server.required": "The SIP server field is required.",
     "validation.sip_secret_port.required": "The SIP secret port field is required.",
     "validation.context.required": "The context field is required.",
-    "validation.transport.required": "The transport field is required."
+    "validation.transport.required": "The transport field is required.",
+    "firewall.validation.provider.required": "The field provider is required.",
+    "firewall.validation.number_pool.required": "The field number pool is required.",
+    "firewall.validation.customer_id.required": "The field customer is required.",
+    "firewall.validation.customer_id.integer": "The field customer must be valid.",
+    "firewall.not_found": "Firewall Network not found. Please check the information and try again.",
+    "firewall.created": "Firewall created Successfully.",
+    "firewall.edited": "Firewall updated Successfully.",
+    "firewall.deleted": "Firewall deleted Successfully.",
+    "firewall.validation.network_host.required": "The field Network/Host is required.",
+    "firewall.validation.assigned_zone.required": "The field Street Address is required.",
+    "firewall.validation.customer.required": "The field customer is required.",
+    "firewall.validation.description.required": "The field description is required."
 }

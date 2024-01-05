@@ -15,6 +15,7 @@ class PermissionSeeder extends Seeder
         $permissions = [
             // Customer Permissions
             [
+
                 'name' => 'create-customer',
                 'display_name' => 'Create Customer/Company',
                 'description' => 'Create new Customer/Company',
@@ -75,6 +76,28 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'List Trunk',
                 'description' => 'List the Trunks',
             ],
+            [
+
+                'name' => 'create-firewall',
+                'display_name' => 'Create Firewall', // optional
+                'description' => 'create new Firewall', // optional
+            ],
+            [
+                'name' => 'edit-firewall',
+                'display_name' => 'Edit Firewall', // optional
+                'description' => 'edit existing Firewall', // optional
+            ],
+            [
+                'name' => 'delete-firewall',
+                'display_name' => 'Delete Firewall', // optional
+                'description' => 'delete new Firewall', // optional
+            ],
+            [
+                'name' => 'list-firewall',
+                'display_name' => 'List Firewall', // optional
+                'description' => 'List the Firewall', // optional
+            ]
+
         ];
 
         foreach ($permissions as $permission) {
