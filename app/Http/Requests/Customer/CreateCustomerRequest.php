@@ -34,9 +34,9 @@ class CreateCustomerRequest extends FormRequest
             'contact_person_email' => 'required|email|max:255',
             'contact_person_phone' => 'required|string|max:20',
         ];
-
     }
-    public function messages()
+
+    public function messages(): array
     {
         return [
             'name.required' => __('validation.customer.name.required'),
@@ -50,6 +50,6 @@ class CreateCustomerRequest extends FormRequest
             'contact_person_email.email' => __('validation.contact_person_email.email'),
             'contact_person_phone.required' => __('validation.contact_person_phone.required'),
         ];
-
     }
+
 }

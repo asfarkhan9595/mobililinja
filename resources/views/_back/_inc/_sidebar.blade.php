@@ -36,16 +36,16 @@
                 <li><a href="systemrecordings.html"><i class="icon-volume-2"></i><span>System recordings</span></a></li>
                 <li><a href="reports.html"><i class="icon-pie-chart"></i><span>Reports</span></a></li>
                 -->
+
+                @if(auth()->user()->hasRole(['superadmin','admin']))
                 <li class="header">SuperAdmin</li>
-                @if(auth()->user()->hasPermission(['create-customer','edit-customer','delete-customer','list-customer']))
-                <li><a href="{{ route('superadmin.customers.index') }}"><i class="icon-globe"></i><span>Customers</span></a></li>
+                    <li><a href="{{ route('superadmin.customers.index') }}"><i class="icon-globe"></i><span>Customers</span></a></li>
+                    <li><a href="#"><i class="icon-docs"></i><span>Invoices</span></a></li>
+                    <li><a href="{{ route('superadmin.pstn.index') }}"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>
+                    <li><a href="#"><i class="icon-share"></i><span>Trunks</span></a></li>
+                    <li><a href="#"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
+                    <li><a href="#"><i class="icon-ban"></i><span>Firewall</span></a></li>
                 @endif
-                <li><a href="#"><i class="icon-docs"></i><span>Invoices</span></a></li>
-                <li><a href="#"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>
-                @if(auth()->user()->hasPermission(['create-trunk','edit-trunk','delete-trunk','list-trunk']))
-                <li><a href="{{ route('superadmin.trunks.index') }}"><i class="icon-share"></i><span>Trunks</span></a></li>
-            @endif                <li><a href="#"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
-                <li><a href="#"><i class="icon-ban"></i><span>Firewall</span></a></li>
             </ul>
         </nav>
     </div><div class="slimScrollBar" style="background: rgb(28, 34, 44); width: 2px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 3px; z-index: 99; right: 1px; height: 94.2156px;"></div><div class="slimScrollRail" style="width: 2px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div></div>

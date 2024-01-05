@@ -52,13 +52,16 @@ class Module extends Command
         if(!File::exists(resource_path("views/_back/superadmin/".$module.'s')))
         File::makeDirectory(resource_path("views/_back/superadmin/".$module.'s'), 0755, true);
         // Create Resources
-        $resourcePath = resource_path("views/_back/superadmin/{$module}s/manage.blade.php");
+        $resourcePath = resource_path("views/_back/superadmin/{$module}s/index.blade.php");
         $this->generateFile($resourcePath, $this->getResourceStub($module));
 
         $resourcePath = resource_path("views/_back/superadmin/{$module}s/create.blade.php");
         $this->generateFile($resourcePath, $this->getResourceStub($module));
 
         $resourcePath = resource_path("views/_back/superadmin/{$module}s/edit.blade.php");
+        $this->generateFile($resourcePath, $this->getResourceStub($module));
+
+        $resourcePath = resource_path("views/_back/superadmin/{$module}s/delete.blade.php");
         $this->generateFile($resourcePath, $this->getResourceStub($module));
 
         $this->info('Module files generated successfully.');

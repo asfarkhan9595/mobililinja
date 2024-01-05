@@ -19,7 +19,7 @@ class CustomerService
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getAllCustomers(): \Illuminate\Support\Collection
+    public function getAllCustomers()
     {
         try {
             // Fetch all the customers

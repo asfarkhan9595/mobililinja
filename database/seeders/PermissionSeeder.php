@@ -34,29 +34,48 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'List Customer',
                 'description' => 'List the Customers/Companies',
             ],
-
-           // Trunk Permissions
-        [
-            'name' => 'create-trunk',
-            'display_name' => 'Create Trunk',
-            'description' => 'Create new Trunk',
-        ],
-        [
-            'name' => 'edit-trunk',
-            'display_name' => 'Edit Trunk',
-            'description' => 'Edit existing Trunk',
-        ],
-        [
-            'name' => 'delete-trunk',
-            'display_name' => 'Delete Trunk',
-            'description' => 'Delete Trunk',
-        ],
-        [
-            'name' => 'list-trunk',
-            'display_name' => 'List Trunk',
-            'description' => 'List the Trunks',
-        ],
-    ];
+            [
+                'name' => 'create-pstn',
+                'display_name' => 'Create PSTN', // optional
+                'description' => 'create new PSTN', // optional
+            ],
+            [
+                'name' => 'edit-pstn',
+                'display_name' => 'Edit PSTN', // optional
+                'description' => 'edit existing PSTN', // optional
+            ],
+            [
+                'name' => 'delete-pstn',
+                'display_name' => 'Delete PSTN', // optional
+                'description' => 'delete new PSTN', // optional
+            ],
+            [
+                'name' => 'list-pstn',
+                'display_name' => 'List PSTN', // optional
+                'description' => 'List the PSTN', // optional
+            ],
+            // Trunk Permissions
+            [
+                'name' => 'create-trunk',
+                'display_name' => 'Create Trunk',
+                'description' => 'Create new Trunk',
+            ],
+            [
+                'name' => 'edit-trunk',
+                'display_name' => 'Edit Trunk',
+                'description' => 'Edit existing Trunk',
+            ],
+            [
+                'name' => 'delete-trunk',
+                'display_name' => 'Delete Trunk',
+                'description' => 'Delete Trunk',
+            ],
+            [
+                'name' => 'list-trunk',
+                'display_name' => 'List Trunk',
+                'description' => 'List the Trunks',
+            ],
+        ];
 
         foreach ($permissions as $permission) {
             Permission::updateOrCreate(['name' => $permission['name']], $permission);
