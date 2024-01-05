@@ -42,7 +42,7 @@
                     <li><a href="{{ route('superadmin.customers.index') }}"><i class="icon-globe"></i><span>Customers</span></a></li>
                     <li><a href="{{ route('superadmin.invoices.index') }}"><i class="icon-docs"></i><span>Invoices</span></a></li>
                     <li><a href="{{ route('superadmin.pstn.index') }}"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>
-                    <li><a href="#"><i class="icon-share"></i><span>Trunks</span></a></li>
+                    <li><a href="{{ route('superadmin.trunks.index') }}"><i class="icon-share"></i><span>Trunks</span></a></li>
                     <li><a href="#"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
                     <li><a href="{{ route('superadmin.firewalls.index') }}"><i class="icon-ban"></i><span>Firewall</span></a></li>
                 @endif
