@@ -30,7 +30,7 @@ class FirewallController extends Controller
     {
         try {
             $customerService = new CustomerService();
-            $customers = $customerService->getAllCustomers()->pluck('name','id')->toArray();
+            $customers = $customerService->getAllCustomers()->pluck('name','id');
             return $firewallDataTable->render('_back.superadmin.firewalls.index',compact('customers'));
         }catch(Exception $e){
             $this->log($e->getMessage(), auth()->id ?? '', 'Firewall - List/Select Operation', request()->ip(), $e);
