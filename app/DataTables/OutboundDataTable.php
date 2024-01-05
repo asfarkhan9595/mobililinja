@@ -24,8 +24,9 @@ class OutboundDataTable extends DataTable
                 <button class="btn btn-outline-danger mb-2 deleteBtn" data-toggle="modal"  data-record-id="' . $row->id . '" data-target="#exampleModalCenter"><i class="fa fa-trash-o"></i></button>';
             })
             ->addColumn('trunk', function($row){
-                return $row->trunk->tname;
+                return $row->trunk ? $row->trunk->tname : null;
             })
+            
             ->setRowId('id')
             ->rawColumns(['action']);
     }

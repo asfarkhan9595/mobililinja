@@ -56,8 +56,8 @@
                                         <div class="modal-footer">
                                             <button class="btn btn-default mb-2" data-dismiss="modal"
                                                 aria-label="Close">Cancel</button>
-                                            <input type="submit" class="btn btn-outline-info mb-2"
-                                                value="Save"></button>
+                                           <input type="submit" class="btn btn-outline-info mb-2" value="Save">
+
                                         </div>
                                     </div>
                                 </div>
