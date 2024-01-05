@@ -69,5 +69,16 @@
     "invoice.validation.status.required" : "The field status is required.",
     "invoice.validation.payment_mode.required" : "The field payment mode is required for the invoice.",
     "invoice.validation.customer_id.required" : "The customer must be valid."
-
+    "firewall.validation.provider.required": "The field provider is required.",
+    "firewall.validation.number_pool.required": "The field number pool is required.",
+    "firewall.validation.customer_id.required": "The field customer is required.",
+    "firewall.validation.customer_id.integer": "The field customer must be valid.",
+    "firewall.not_found": "Firewall Network not found. Please check the information and try again.",
+    "firewall.created": "Firewall created Successfully.",
+    "firewall.edited": "Firewall updated Successfully.",
+    "firewall.deleted": "Firewall deleted Successfully.",
+    "firewall.validation.network_host.required": "The field Network/Host is required.",
+    "firewall.validation.assigned_zone.required": "The field Street Address is required.",
+    "firewall.validation.customer.required": "The field customer is required.",
+    "firewall.validation.description.required": "The field description is required."
 }
