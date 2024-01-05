@@ -99,7 +99,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default mb-2" data-dismiss="modal"
                                             aria-label="Close">Cancel</button>
-                                        <input type="submit" class="btn btn-outline-info mb-2" value="Save"></button>
+                                        <input type="submit" class="btn btn-outline-info mb-2" value="Save">
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@
                     },
                     sip_secret_port: {
                         required: true,
-                        integer: true
+                        digits: true // Use 'digits' for integer validation
                     },
                     context: {
                         required: true
@@ -145,7 +145,7 @@
                     },
                 },
                 messages: {
-                    tname: "Please enter the trunk nameeee",
+                    tname: "Please enter the trunk name",
                     description: "Please enter the description",
                     secret: "Please enter the secret",
                     authentication: "Please enter the authentication",
@@ -153,7 +153,7 @@
                     sip_server: "Please enter the SIP server",
                     sip_secret_port: {
                         required: 'The field sip secret port is required.',
-                        number: 'Please enter a valid numeric value for sip secret port.',
+                        integer: 'Please enter a valid numeric value for sip secret port.',
                     },
                     context: "Please enter the context",
                     transport: "Please enter the transport",

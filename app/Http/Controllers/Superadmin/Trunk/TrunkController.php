@@ -47,6 +47,7 @@ class TrunkController extends Controller
      */
     public function store(CreateTrunkRequest $request): \Illuminate\Http\JsonResponse
     {
+        
         try {
             $createTrunk = DB::transaction(function () use ($request) {
                 $createTrunk = $this->trunkService->create($request);
