@@ -15,6 +15,7 @@ class PermissionSeeder extends Seeder
         $permissions = [
             // Customer Permissions
             [
+
                 'name' => 'create-customer',
                 'display_name' => 'Create Customer/Company',
                 'description' => 'Create new Customer/Company',
@@ -34,6 +35,7 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'List Customer',
                 'description' => 'List the Customers/Companies',
             ],
+            // PSTN Permission
             [
                 'name' => 'create-pstn',
                 'display_name' => 'Create PSTN', // optional
@@ -55,10 +57,13 @@ class PermissionSeeder extends Seeder
                 'description' => 'List the PSTN', // optional
             ],
 
+
        
 
-        // Trunk Permissions
-     
+
+
+            // Trunk Permissions
+
             [
                 'name' => 'create-trunk',
                 'display_name' => 'Create Trunk',
@@ -79,6 +84,7 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'List Trunk',
                 'description' => 'List the Trunks',
             ],
+
        
             [
                 'name' => 'create-outbound',
@@ -102,27 +108,52 @@ class PermissionSeeder extends Seeder
             ],
 
         
-           // Trunk Permissions
+
+
+            // Invoice Permissions
             [
-                'name' => 'create-trunk',
-                'display_name' => 'Create Trunk',
-                'description' => 'Create new Trunk',
+                'name' => 'create-invoice',
+                'display_name' => 'Create Invoice',
+                'description' => 'Create new Invoice',
             ],
             [
-                'name' => 'edit-trunk',
-                'display_name' => 'Edit Trunk',
-                'description' => 'Edit existing Trunk',
+                'name' => 'edit-invoice',
+                'display_name' => 'Edit Invoice',
+                'description' => 'Edit existing Invoice',
             ],
             [
-                'name' => 'delete-trunk',
-                'display_name' => 'Delete Trunk',
-                'description' => 'Delete Trunk',
+                'name' => 'delete-invoice',
+                'display_name' => 'Delete Invoice',
+                'description' => 'Delete Invoice',
             ],
             [
-                'name' => 'list-trunk',
-                'display_name' => 'List Trunk',
-                'description' => 'List the Trunks',
+                'name' => 'list-invoice',
+                'display_name' => 'List Invoices',
+                'description' => 'List the Invoices',
             ],
+          
+            [
+
+                'name' => 'create-firewall',
+                'display_name' => 'Create Firewall', // optional
+                'description' => 'create new Firewall', // optional
+            ],
+            [
+                'name' => 'edit-firewall',
+                'display_name' => 'Edit Firewall', // optional
+                'description' => 'edit existing Firewall', // optional
+            ],
+            [
+                'name' => 'delete-firewall',
+                'display_name' => 'Delete Firewall', // optional
+                'description' => 'delete new Firewall', // optional
+            ],
+            [
+                'name' => 'list-firewall',
+                'display_name' => 'List Firewall', // optional
+                'description' => 'List the Firewall', // optional
+            ]
+
         ];
 
 

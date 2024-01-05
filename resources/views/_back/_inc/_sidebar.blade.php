@@ -41,24 +41,18 @@
                 <li><a href="reports.html"><i class="icon-pie-chart"></i><span>Reports</span></a></li>
                 -->
 
-                    @if (auth()->user()->hasRole(['superadmin', 'admin']))
-                        <li class="header">SuperAdmin</li>
-                        <li><a href="{{ route('superadmin.customers.index') }}"><i
-                                    class="icon-globe"></i><span>Customers</span></a></li>
-                        <li><a href="#"><i class="icon-docs"></i><span>Invoices</span></a></li>
-                        <li><a href="{{ route('superadmin.pstn.index') }}"><i
-                                    class="icon-compass"></i><span>PSTN-numbers</span></a></li>
-                        @if (auth()->user()->hasPermission(['create-trunk', 'edit-trunk', 'delete-trunk', 'list-trunk']))
-                            <li><a href="{{ route('superadmin.trunks.index') }}"><i
-                                        class="icon-share"></i><span>Trunks</span></a></li>
-                        @endif
-                        @if (auth()->user()->hasPermission(['create-outbound', 'edit-outbound', 'delete-outbound', 'list-outbound']))
-                            <li><a href="{{ route('superadmin.outbounds.index') }}"><i
-                                        class="icon-call-out"></i><span>Outbound routes</span></a></li>
-                        @endif
+               
 
-                        <li><a href="#"><i class="icon-ban"></i><span>Firewall</span></a></li>
-                    @endif
+                @if(auth()->user()->hasRole(['superadmin','admin']))
+                <li class="header">SuperAdmin</li>
+                    <li><a href="{{ route('superadmin.customers.index') }}"><i class="icon-globe"></i><span>Customers</span></a></li>
+                    <li><a href="{{ route('superadmin.invoices.index') }}"><i class="icon-docs"></i><span>Invoices</span></a></li>
+                    <li><a href="{{ route('superadmin.pstn.index') }}"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>
+                    <li><a href="{{ route('superadmin.trunks.index') }}"><i class="icon-share"></i><span>Trunks</span></a></li>
+                    <li><a href="#"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
+                    <li><a href="{{ route('superadmin.firewalls.index') }}"><i class="icon-ban"></i><span>Firewall</span></a></li>
+                @endif
+             
                 </ul>
             </nav>
         </div>
