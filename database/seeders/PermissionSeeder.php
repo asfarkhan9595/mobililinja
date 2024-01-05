@@ -57,7 +57,13 @@ class PermissionSeeder extends Seeder
                 'description' => 'List the PSTN', // optional
             ],
 
+
+       
+
+
+
             // Trunk Permissions
+
             [
                 'name' => 'create-trunk',
                 'display_name' => 'Create Trunk',
@@ -78,6 +84,32 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'List Trunk',
                 'description' => 'List the Trunks',
             ],
+
+       
+            [
+                'name' => 'create-outbound',
+                'display_name' => 'Create Outbound',
+                'description' => 'Create new Outbound',
+            ],
+            [
+                'name' => 'edit-outbound',
+                'display_name' => 'Edit Outbound',
+                'description' => 'Edit existing Outbound',
+            ],
+            [
+                'name' => 'delete-outbound',
+                'display_name' => 'Delete Outbound',
+                'description' => 'Delete Outbound',
+            ],
+            [
+                'name' => 'list-outbound',
+                'display_name' => 'List Outbound',
+                'description' => 'List the Outbounds',
+            ],
+
+        
+
+
             // Invoice Permissions
             [
                 'name' => 'create-invoice',
@@ -99,27 +131,7 @@ class PermissionSeeder extends Seeder
                 'display_name' => 'List Invoices',
                 'description' => 'List the Invoices',
             ],
-            // Trunk Permissions
-            [
-                'name' => 'create-trunk',
-                'display_name' => 'Create Trunk',
-                'description' => 'Create new Trunk',
-            ],
-            [
-                'name' => 'edit-trunk',
-                'display_name' => 'Edit Trunk',
-                'description' => 'Edit existing Trunk',
-            ],
-            [
-                'name' => 'delete-trunk',
-                'display_name' => 'Delete Trunk',
-                'description' => 'Delete Trunk',
-            ],
-            [
-                'name' => 'list-trunk',
-                'display_name' => 'List Trunk',
-                'description' => 'List the Trunks',
-            ],
+          
             [
 
                 'name' => 'create-firewall',
@@ -143,6 +155,7 @@ class PermissionSeeder extends Seeder
             ]
 
         ];
+
 
         foreach ($permissions as $permission) {
             Permission::updateOrCreate(['name' => $permission['name']], $permission);
