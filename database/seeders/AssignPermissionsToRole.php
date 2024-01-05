@@ -27,6 +27,11 @@ class AssignPermissionsToRole extends Seeder
             if ($admin) {
                 $admin->syncPermissions($all_permissions);
             }
+
+            $customer = Role::whereName('customer')->first();
+            if ($customer) {
+                $customer->syncPermissions($all_permissions);
+            }
         }
     }
 }

@@ -103,5 +103,20 @@
     "firewall.validation.network_host.required": "The field Network/Host is required.",
     "firewall.validation.assigned_zone.required": "The field Street Address is required.",
     "firewall.validation.customer.required": "The field customer is required.",
-    "firewall.validation.description.required": "The field description is required."
+    "firewall.validation.description.required": "The field description is required.",
+
+    "phonebook.created": "Phonebook entry created successfully.",
+    "phonebook.updated": "Phonebook entry updated successfully.",
+    "phonebook.creation.failed": "Failed to create phonebook entry. Please try again.",
+    "phonebook.update.failed": "Failed to update phonebook entry. Please try again.",
+    "phonebook.delete.failed": "Failed to delete phonebook entry. Please try again.",
+    "phonebook.edited": "Phonebook entry updated successfully.",
+    "phonebook.deleted": "Phonebook entry deleted successfully.",
+    "phonebook.not_found": "Phonebook entry not found. Please check the information and try again.",
+    "phonebook.validation.first_name.required": "The First Name field is required.",
+    "phonebook.validation.last_name.required": "The Last Name field is required.",
+    "phonebook.validation.phone_number.required": "The Phone Number field is required.",
+    "phonebook.validation.mobile_number.required": "The Mobile Number field is required.",
+    "phonebook.validation.company.required": "The Company field is required.",
+    "phonebook.validation.position.required": "The Position field is required."
 }

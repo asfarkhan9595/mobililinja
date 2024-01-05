@@ -36,3 +36,11 @@ Route::group(['middleware'=>'auth','namespace'=>'App\Http\Controllers'],function
         }
     });
 });
+Route::group(['middleware'=>'auth','namespace'=>'App\Http\Controllers'],function(){
+    Route::group(['prefix'=>'customer'],function(){
+        // Use glob to dynamically include route files from the specified folder
+        foreach (glob(__DIR__.'/v1/customer/*.php') as $file) {
+            include $file;
+        }
+    });
+});

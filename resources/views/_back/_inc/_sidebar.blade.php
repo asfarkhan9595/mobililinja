@@ -40,9 +40,14 @@
                 <li><a href="systemrecordings.html"><i class="icon-volume-2"></i><span>System recordings</span></a></li>
                 <li><a href="reports.html"><i class="icon-pie-chart"></i><span>Reports</span></a></li>
                 -->
-
-               
-
+                @if(auth()->user()->hasRole(['superadmin','admin','customer']))
+                <li class="header">Customer</li>
+                <li><a href="webphone.html"><i class="icon-call-end"></i><span>Webphone</span></a></li>
+                <li class="active open"><a href="dashboard.html"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>
+                <li><a href="{{ route('customer.phonebooks.index') }}"><i class="icon-book-open"></i><span>Phonebook</span></a></li>
+                <li><a href="calendar.html"><i class="icon-calendar"></i><span>Calendar</span></a></li>
+                <li><a href="whatsapp.html"><i class="fa fa-whatsapp"></i><span>WhatsApp</span></a></li>
+                @endif
                 @if(auth()->user()->hasRole(['superadmin','admin']))
                 <li class="header">SuperAdmin</li>
                     <li><a href="{{ route('superadmin.customers.index') }}"><i class="icon-globe"></i><span>Customers</span></a></li>

@@ -25,9 +25,9 @@ class RoleSeeder extends Seeder
                 'description' => 'Admin is the manager of project', // optional
             ],
             [
-                'name' => 'customer',
-                'display_name' => 'Customer', // optional
-                'description' => 'Customer is the end-user of project', // optional
+                    'name' => 'customer',
+                    'display_name' => 'Customer', // optional
+                    'description' => 'Customer is the end-user of project', // optional
             ]
         ];
 

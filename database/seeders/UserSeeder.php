@@ -26,5 +26,12 @@ class UserSeeder extends Seeder
             'password'=>Hash::make('Pa$$w0rd!')
         ]);
         $user->addRole('admin');
+
+        $user = User::updateOrCreate([
+            'name' => 'Customer',
+            'email' => 'customer@customer.com',
+            'password' => Hash::make('Pa$$w0rd!')
+        ]);
+        $user->addRole('customer');
     }
 }

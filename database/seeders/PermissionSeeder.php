@@ -152,7 +152,29 @@ class PermissionSeeder extends Seeder
                 'name' => 'list-firewall',
                 'display_name' => 'List Firewall', // optional
                 'description' => 'List the Firewall', // optional
-            ]
+            ],
+
+// PhoneBook permissions
+            [
+                'name' => 'create-phonebook',
+                'display_name' => 'Create Phonebook Entry',
+                'description' => 'Create new entry in Phonebook',
+            ],
+            [
+                'name' => 'edit-phonebook',
+                'display_name' => 'Edit Phonebook Entry',
+                'description' => 'Edit existing entry in Phonebook',
+            ],
+            [
+                'name' => 'delete-phonebook',
+                'display_name' => 'Delete Phonebook Entry',
+                'description' => 'Delete entry in Phonebook',
+            ],
+            [
+                'name' => 'list-phonebook',
+                'display_name' => 'List Phonebook Entries',
+                'description' => 'List the entries in Phonebook',
+            ],
 
         ];
 
