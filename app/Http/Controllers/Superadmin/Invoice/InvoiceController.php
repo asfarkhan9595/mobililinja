@@ -30,7 +30,7 @@ class InvoiceController extends Controller
     {
         try {
             $customerService = new CustomerService;
-            $customers = $customerService->getAllCustomers()->pluck('name','id')->toArray();
+            $customers = $customerService->getAllCustomers()->pluck('name','id');
             return $invoiceDataTable->render('_back.superadmin.invoices.index',compact('customers'));
         }catch(Exception $e){
             $this->log($e->getMessage(), auth()->id ?? '', 'Invoice - List/Select Operation', request()->ip(), $e);
