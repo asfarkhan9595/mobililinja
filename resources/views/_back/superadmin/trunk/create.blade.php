@@ -99,7 +99,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default mb-2" data-dismiss="modal"
                                             aria-label="Close">Cancel</button>
-                                        <input type="submit" class="btn btn-outline-info mb-2" value="Save"></button>
+                                        <input type="submit" class="btn btn-outline-info mb-2" value="Save">
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +134,8 @@
                         required: true
                     },
                     sip_secret_port: {
-                        required: true
+                        required: true,
+                        digits: true // Use 'digits' for integer validation
                     },
                     context: {
                         required: true
@@ -144,13 +145,16 @@
                     },
                 },
                 messages: {
-                    tname: "Please enter the trunk nameeee",
+                    tname: "Please enter the trunk name",
                     description: "Please enter the description",
                     secret: "Please enter the secret",
                     authentication: "Please enter the authentication",
                     registration: "Please enter the registration",
                     sip_server: "Please enter the SIP server",
-                    sip_secret_port: "Please enter the SIP secret port",
+                    sip_secret_port: {
+                        required: 'The field sip secret port is required.',
+                        integer: 'Please enter a valid numeric value for sip secret port.',
+                    },
                     context: "Please enter the context",
                     transport: "Please enter the transport",
                 },
@@ -177,6 +181,8 @@
                                     }
                                 }
                             } else {
+
+                                $(form)[0].reset();
                                 var alertHtml =
                                     '<div class="alert alert-success mt-4 alert-dismissible fade show" role="alert">' +
                                     'Data submitted successfully' +

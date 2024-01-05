@@ -98,7 +98,8 @@
             if ($('#trunkEditForm').valid()) {
                 // Perform an AJAX POST request to update the data
                 $.ajax({
-                    url: "{{ route('superadmin.trunks.update', ['trunk' => 'trunk_id']) }}".replace('trunk_id', id),
+                    url: "{{ route('superadmin.trunks.update', ['trunk' => 'trunk_id']) }}".replace(
+                        'trunk_id', id),
                     type: "POST",
                     data: {
                         _token: '{{ csrf_token() }}',
@@ -159,71 +160,71 @@
             }
         });
         $('#trunkEditForm').validate({
-    rules: {
-        tname: {
-            required: true
-        },
-        description: {
-            required: true
-        },
-        secret: {
-            required: true
-        },
-        authentication: {
-            required: true
-        },
-        registration: {
-            required: true
-        },
-        sip_server: {
-            required: true
-        },
-        sip_secret_port: {
-            required: true,
-            digits: true  // Ensure it is a positive integer
-        },
-        context: {
-            required: true
-        },
-        transport: {
-            required: true
-        },
-    },
-    messages: {
-        tname: {
-            required: "Please enter the trunk name"
-        },
-        description: {
-            required: "Please enter the description"
-        },
-        secret: {
-            required: "Please enter the secret"
-        },
-        authentication: {
-            required: "Please enter the authentication"
-        },
-        registration: {
-            required: "Please enter the registration"
-        },
-        sip_server: {
-            required: "Please enter the SIP server"
-        },
-        sip_secret_port: {
-            required: "Please enter the SIP secret port"
-        },
-        context: {
-            required: "Please enter the context"
-        },
-        transport: {
-            required: "Please enter the transport"
-        },
-    },
-    errorPlacement: function (error, element) {
-        // Customize the placement of error messages
-        error.insertAfter(element); // Default behavior: display the error after the input field
-    },
-    // Add any other options or callback functions as needed
-});
+            rules: {
+                tname: {
+                    required: true
+                },
+                description: {
+                    required: true
+                },
+                secret: {
+                    required: true
+                },
+                authentication: {
+                    required: true
+                },
+                registration: {
+                    required: true
+                },
+                sip_server: {
+                    required: true
+                },
+                sip_secret_port: {
+                    required: true,
+                    digits: true // Ensure it is a positive integer
+                },
+                context: {
+                    required: true
+                },
+                transport: {
+                    required: true
+                },
+            },
+            messages: {
+                tname: {
+                    required: "Please enter the trunk name"
+                },
+                description: {
+                    required: "Please enter the description"
+                },
+                secret: {
+                    required: "Please enter the secret"
+                },
+                authentication: {
+                    required: "Please enter the authentication"
+                },
+                registration: {
+                    required: "Please enter the registration"
+                },
+                sip_server: {
+                    required: "Please enter the SIP server"
+                },
+                sip_secret_port: {
+                    required: "Please enter the SIP secret port"
+                },
+                context: {
+                    required: "Please enter the context"
+                },
+                transport: {
+                    required: "Please enter the transport"
+                },
+            },
+            errorPlacement: function(error, element) {
+                // Customize the placement of error messages
+                error.insertAfter(element); // Default behavior: display the error after the input field
+            },
+            // Add any other options or callback functions as needed
+        });
 
         function deleteTrunk(id) {
             // Make an AJAX request to delete the trunk
