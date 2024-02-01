@@ -40,6 +40,7 @@
                 <li><a href="systemrecordings.html"><i class="icon-volume-2"></i><span>System recordings</span></a></li>
                 <li><a href="reports.html"><i class="icon-pie-chart"></i><span>Reports</span></a></li>
                 -->
+
                 @if(auth()->user()->hasRole(['superadmin','admin','customer']))
                 <li class="header">Customer</li>
                 <li><a href="webphone.html"><i class="icon-call-end"></i><span>Webphone</span></a></li>
@@ -54,10 +55,10 @@
                     <li><a href="{{ route('superadmin.invoices.index') }}"><i class="icon-docs"></i><span>Invoices</span></a></li>
                     <li><a href="{{ route('superadmin.pstn.index') }}"><i class="icon-compass"></i><span>PSTN-numbers</span></a></li>
                     <li><a href="{{ route('superadmin.trunks.index') }}"><i class="icon-share"></i><span>Trunks</span></a></li>
-                    <li><a href="#"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
+                    <li><a href="{{ route('superadmin.outbounds.index') }}"><i class="icon-call-out"></i><span>Outbound routes</span></a></li>
                     <li><a href="{{ route('superadmin.firewalls.index') }}"><i class="icon-ban"></i><span>Firewall</span></a></li>
                 @endif
-             
+
                 </ul>
             </nav>
         </div>
